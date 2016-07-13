@@ -4,6 +4,7 @@
   "description": "Show widgets in your twitch stream",
   "main": "index.js",
   "scripts": {
+    "debug": "$(npm bin)/node-debug cli.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Nicholas Terwoord",
@@ -11,5 +12,8 @@
   "dependencies": {
     "express": "^4.14.0",
     "express-ws": "^2.0.0-rc.1"
+  },
+  "devDependencies": {
+    "node-inspector": "^0.12.8"
   }
 }
