@@ -1,0 +1,11 @@
+{
+  "name": "twitch-widgets",
+  "version": "0.0.1",
+  "description": "Show widgets in your twitch stream",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nicholas Terwoord",
+  "license": "MIT"
+}
