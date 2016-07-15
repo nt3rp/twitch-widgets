@@ -1,6 +1,11 @@
 var achievements = require('./achievements');
 var vorpal = require('vorpal')();
 
+// TODO: Should this be started separately?
+var WebSocketServer = require('./server')
+var wss = new WebSocketServer();
+wss.listen();
+
 // TODO: Make pretty
 
 vorpal
@@ -8,9 +13,7 @@ vorpal
   .autocomplete(Object.keys(achievements))
   .action(function(args, callback) {
     var achievement = achievements[args.name];
-
-    // TODO: Actually fire off an event
-    this.log(achievement);
+    wss.broadcast(achievement);
     callback();
   });
 
