@@ -1,12 +1,16 @@
+var achievements = require('./achievements');
 var vorpal = require('vorpal')();
 
-// TODO: Get achievements from JSON file
+// TODO: Make pretty
 
 vorpal
   .command('achievement [name]', 'Trigger a named achievement') // .option('-l, --list')
-  .autocomplete(['ending-1', 'ending-2'])
+  .autocomplete(Object.keys(achievements))
   .action(function(args, callback) {
-    this.log(args);
+    var achievement = achievements[args.name];
+
+    // TODO: Actually fire off an event
+    this.log(achievement);
     callback();
   });
 

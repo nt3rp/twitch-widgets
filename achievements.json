@@ -1,0 +1,7 @@
+{
+  "bad-end": {
+    "name":         "Bad End",
+    "description":  "Lose against Lavos",
+    "image":        "URL, or data? Can we send data?"
+  }
+}
