@@ -2,8 +2,10 @@
   "name": "twitch-widgets",
   "version": "0.0.1",
   "description": "Show widgets in your twitch stream",
-  "main": "index.js",
+  "main": "cli.js",
   "scripts": {
+    "start": "node cli.js",
+    "server": "node server.js",
     "debug": "$(npm bin)/node-debug cli.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

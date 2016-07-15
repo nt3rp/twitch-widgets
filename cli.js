@@ -1,19 +1,27 @@
 var achievements = require('./achievements');
 var vorpal = require('vorpal')();
+var WebSocket = require('ws');
 
-// TODO: Should this be started separately?
-var WebSocketServer = require('./server')
-var wss = new WebSocketServer();
-wss.listen();
+// TODO: Don't hardcode this
+var ws = new WebSocket('ws://localhost:3000/events');
+
+// TODO: Handle server stoppage
 
 // TODO: Make pretty
 
+// TODO: Search achievements by tag
+// TODO: list all achievements
+// TODO: Fix bug where not specifying name doesn't show help information
+// TODO: Add history
 vorpal
   .command('achievement [name]', 'Trigger a named achievement') // .option('-l, --list')
   .autocomplete(Object.keys(achievements))
   .action(function(args, callback) {
     var achievement = achievements[args.name];
-    wss.broadcast(achievement);
+
+    // Have to send string data.
+    // TODO: Any way to avoid?
+    ws.send(JSON.stringify(achievement));
     callback();
   });
 
