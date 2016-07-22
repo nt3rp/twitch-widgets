@@ -6,7 +6,7 @@ var WebSocket = require('ws');
 // TODO: Don't hardcode this
 var ws = new WebSocket('ws://localhost:3000/events');
 
-// TODO: Handle server stoppage
+// TODO: Handle server stoppage / errors / reconnect
 
 // TODO: Make pretty
 
