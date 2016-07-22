@@ -2,12 +2,15 @@ var achievements = require('./achievements');
 var vorpal = require('vorpal')();
 var WebSocket = require('ws');
 
+// TODO: Is there something like a procfile for Nodejs?
 // TODO: Don't hardcode this
 var ws = new WebSocket('ws://localhost:3000/events');
 
 // TODO: Handle server stoppage
 
 // TODO: Make pretty
+
+// TODO: Auto-serve widgets somehow? (i.e. each different endpoint automatically gets a thing)
 
 // TODO: Search achievements by tag
 // TODO: list all achievements
