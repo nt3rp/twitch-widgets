@@ -1,21 +1,36 @@
-var http = require('http')
-var WebSocketServer = require('ws').Server;
+var server = require('http').createServer()
+  , url = require('url')
+  , WebSocketServer = require('ws').Server
+  , wss = new WebSocketServer({
+      server: server
+    , path: '/events'
+  }) // TODO: Other config?
+  , express = require('express')
+  , app = express()
+  , port = 3000;
 
-// TODO: obtain config
-var server = http.createServer();
-var wss = new WebSocketServer({server: server, path: '/events'});
+app.use(express.static('widgets'));
 
-wss.on('connection', function connection(ws) {
-  ws.on('message', function incoming(message) {
-    // TODO: Special action if message is 'rebroadcast'
-    console.log('received: %s', message);
+
+wss.broadcast = function (data) {
+  wss.clients.forEach(function (client) {
+    client.send(data);
   });
+};
+
+wss.on('connection', function (ws) {
+  // var location = url.parse(ws.upgradeReq.url, true);
+  // you might use location.query.access_token to authenticate or share sessions
+  // or ws.upgradeReq.headers.cookie (see http://stackoverflow.com/a/16395220/151312)
+
+  ws.on('message', function (e) {
+    // TODO: Do things conditionally based on message type
+    console.log(e);
+    wss.broadcast(e)
+  });
+
+  // ws.send('something');
 });
 
-server.listen(3000);
-//
-// WebSocketServer.prototype.broadcast = function(e) {
-//   this.wss.clients.forEach(function(client) {
-//     client.send(e);
-//   });
-// }
+server.on('request', app);
+server.listen(port, function () { console.log('Listening on ' + server.address().port) });
