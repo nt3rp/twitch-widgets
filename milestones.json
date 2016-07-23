@@ -1,0 +1,18 @@
+[
+  {
+    "id":           "game-start",
+    "type":         "event",
+    "topics":       ["progress"],
+    "tags" :        [],
+    "name":         "Game Start!",
+    "description":  "Started the game!"
+  },
+  {
+    "id":           "error",
+    "type":         "event",
+    "topics":       ["progress"],
+    "tags" :        [],
+    "name":         "Glitch!",
+    "description":  "Glitch in the system"
+  }
+]
