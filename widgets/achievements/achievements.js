@@ -27,6 +27,7 @@ var showAchievement = function(achievement, data) {
 
   setTimeout(function() {
     achievement.classList.remove('show');
+    achievement.classList.add('hide');
   }, 5000)
 };
 
@@ -34,6 +35,8 @@ var showAchievement = function(achievement, data) {
 var showAchievements = function(data) {
   var achievements = document.querySelectorAll('.achievement');
   achievements.forEach(function(element) {
-    showAchievement(element, data);
+    setTimeout(function() {
+      showAchievement(element, data);
+    }, 3000)
   });
 };

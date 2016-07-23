@@ -1,17 +1,61 @@
 /*
 TODO:
 - Animate
-- Use Chrono Trigger font
 - Deal with stacking
+- Add rounded corners
+- Scaling
+- Use flexbox
 */
 
+@font-face {
+  font-family: 'Trigger-Bold';
+  src: url('fonts/Trigger-Bold.eot?#iefix') format('embedded-opentype'),  url('fonts/Trigger-Bold.woff') format('woff'), url('fonts/Trigger-Bold.ttf')  format('truetype'), url('fonts/Trigger-Bold.svg#Trigger-Bold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .achievement {
-  border: 1px solid #000;
-  width:200px;
-  height: 200px;
-  display: none;
+  font-family: 'Trigger-Bold';
+
+  width: 240px;
+  height: 94px;
+
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+
+  border-style: solid;
+  border-width: 8px;
+  -moz-border-image: url(default.png) 8 repeat;
+  -webkit-border-image: url(default.png) 8 repeat;
+  -o-border-image: url(default.png) 8 repeat;
+  border-image: url(default.png) 8 fill repeat;
+
+  color: #eee;
+}
+
+.achievement .description {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Styles */
+
+
+
+/* Pop-up animation */
+
+/* Technique from here: https://weblog.west-wind.com/posts/2014/Feb/22/Using-CSS-Transitions-to-SlideUp-and-SlideDown */
+.achievement.show, .achievement.hide {
+  max-height: 0;
+  overflow-y: hidden;
+  -webkit-transition: max-height 0.5s ease-in-out;
+  -moz-transition: max-height 0.5s ease-in-out;
+  -o-transition: max-height 0.5s ease-in-out;
+  transition: max-height 0.5s ease-in-out;
 }
 
 .achievement.show {
-  display: block;
+  max-height: 94px;
 }
