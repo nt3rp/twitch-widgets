@@ -1,0 +1,17 @@
+/*
+TODO:
+- Animate
+- Use Chrono Trigger font
+- Deal with stacking
+*/
+
+.achievement {
+  border: 1px solid #000;
+  width:200px;
+  height: 200px;
+  display: none;
+}
+
+.achievement.show {
+  display: block;
+}

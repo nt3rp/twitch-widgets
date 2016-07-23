@@ -15,5 +15,25 @@ connection.onmessage = function (e) {
   console.log('message');
 
   var data = JSON.parse(e.data);
-  console.log(data);
+  showAchievements(data);
+};
+
+var showAchievement = function(achievement, data) {
+  var image = achievement.querySelector('.image');
+  var title = achievement.querySelector('.name');
+
+  title.innerText = data.name;
+  achievement.classList.add('show');
+
+  setTimeout(function() {
+    achievement.classList.remove('show');
+  }, 5000)
+};
+
+// TODO: Handle achievement stacking
+var showAchievements = function(data) {
+  var achievements = document.querySelectorAll('.achievement');
+  achievements.forEach(function(element) {
+    showAchievement(element, data);
+  });
 };
