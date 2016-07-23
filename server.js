@@ -28,6 +28,8 @@ wss.on('connection', function (ws) {
     wss.broadcast(e)
   });
 
+  // TODO: Send relevant event information to everything (e.g. start and end times)
+  // Config options?
   // ws.send('something');
 });
 

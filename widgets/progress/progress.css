@@ -1,0 +1,26 @@
+* { box-sizing: border-box }
+
+@font-face {
+  font-family: 'Trigger-Bold';
+  src: url('fonts/Trigger-Bold.eot?#iefix') format('embedded-opentype'),  url('fonts/Trigger-Bold.woff') format('woff'), url('fonts/Trigger-Bold.ttf')  format('truetype'), url('fonts/Trigger-Bold.svg#Trigger-Bold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart {
+  width: 75%;
+  height:25%;
+}
+/*
+.chart {
+  background: white;
+  width: 75%;
+  height: 100px;
+  border-bottom: 1px dotted #555;
+}*/
