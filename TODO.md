@@ -21,6 +21,8 @@ track of them (as compared to having a million TODOs scattered across files).
   - Also, create aliases
   - Also, enables the creation of 'on-the-fly' achievements, etc.
 - [ ] Figure out how to do options *without* them merely being binary flags
+- [ ] Determine how to log achievement / progress data + command
+  - Maybe wrap commands with `vorpal.use`? Does `vorpal` have middleware?
 
 ### Achievement
 - [ ] Search by tag

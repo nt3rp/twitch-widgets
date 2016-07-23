@@ -3,16 +3,17 @@
     "id":           "game-start",
     "type":         "event",
     "topics":       ["progress"],
-    "tags" :        [],
+    "tags" :        ["game"],
     "name":         "Game Start!",
     "description":  "Started the game!"
   },
   {
-    "id":           "error",
+    "id":           "money!",
     "type":         "event",
     "topics":       ["progress"],
-    "tags" :        [],
-    "name":         "Glitch!",
-    "description":  "Glitch in the system"
+    "tags" :        ["fundraise"],
+    "name":         "Money!",
+    "description":  "Raise some money!",
+    "marker":       "error"
   }
 ]

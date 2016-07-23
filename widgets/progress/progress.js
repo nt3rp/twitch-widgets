@@ -34,22 +34,36 @@ var logProgress = function(data) {
   // Position = (now - start) / (end-start)
   // switch on message type. If config message, do that
   var location = Math.ceil(Math.random()*100) + '%';
+  console.log(location);
   createIndicator(location, 'cursor.png');
 };
 
-var createIndicator = function(location, image) {
-  var $indicator = $('<img />', {
-    src  : image,
-    class: 'indicator'
+var createIndicator = function(location, image, tags) {
+  tags = tags || [];
+
+  var $content = $('<div>', {});
+  $content.html('testing')
+
+  var $indicator = $('<div />', {
+    class: 'marker'
   });
 
+  $indicator.append($content);
+
   // TODO: Better way of handling image positioning here?
-  var imageWidth = Math.ceil($indicator.get(0).width/2);
+  // TODO: Doesn't work as well with divs :/
+  var containerWidth = $indicator.get(0).width || $indicator.width() || 0;
+  var imageWidth = Math.ceil(containerWidth/2) || 0;
   $indicator.css({left: 'calc(' + location + ' - ' + imageWidth + 'px)'})
+  $indicator.addClass(tags.join(' '));
 
   $chart.append($indicator);
 }
 
+// TODO: Add bubble / rounded corner around markers
+// TODO: Allow text
+// TODO: Handle overlapping events / grouping
+// TODO: Use spritesheet
 // TODO: Preload all images / indicators
 // TODO: Handle connection failures
 // TODO: Handle animation

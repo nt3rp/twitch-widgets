@@ -21,10 +21,22 @@ body {
   position: relative;
 }
 
-.indicator {
+.marker {
   position: absolute;
   bottom: 1em;
+  border-radius: 5em;
+  background-color: #faa;
+  min-width: 1em;
+  min-height: 1em;
   /*bottom: auto;*/
+}
+
+.marker.fundraise {
+
+}
+
+.marker.game {
+
 }
 
 .hide {
