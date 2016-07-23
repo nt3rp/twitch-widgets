@@ -2,6 +2,10 @@
 There are so many things that this app could do. Here's how I am trying to keep
 track of them (as compared to having a million TODOs scattered across files).
 
+# OBS
+- [ ] Verify works cross-network
+- [ ] Verify chroma key
+
 ## Server
 - [ ] Have WebSocket connection send relevant information / config on connection
 - [ ] Decide if server should do different things on different message types
@@ -14,6 +18,8 @@ track of them (as compared to having a million TODOs scattered across files).
 - [ ] Auto-discover widgets
 - [ ] Colorize prompts
 - [ ] Have all widgets use universal event interface (i.e. first instance of some event my trigger an achievement if 'is_achieveable')
+  - Also, create aliases
+  - Also, enables the creation of 'on-the-fly' achievements, etc.
 - [ ] Figure out how to do options *without* them merely being binary flags
 
 ### Achievement

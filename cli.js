@@ -23,7 +23,7 @@ vorpal
   .command('progress [milestone]', 'Trigger a named milestone') // .option('-l, --list')
   .autocomplete(_.map(milestones, 'id'))
   .action(function(args, callback) {
-    var milestone = _.find(milestones, {id: args.name});
+    var milestone = _.find(milestones, {id: args.milestone});
     ws.send(JSON.stringify(milestone));
     callback();
   });

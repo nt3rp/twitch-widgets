@@ -1,6 +1,6 @@
 var server = window.location.hostname + ':' + window.location.port;
-
 var connection = window.connection = new WebSocket('ws://'+server+'/events');
+var topic = 'achievements';
 
 connection.onopen = function () {
   // Do nothing for now... maybe send something to the server?
@@ -14,7 +14,16 @@ connection.onerror = function (error) {
 connection.onmessage = function (e) {
   console.log('message');
 
+  // TODO: Check if data!
+
   var data = JSON.parse(e.data);
+
+  // check if event is in list of subscribed topics
+  // for now, only allow subscribing to one topic
+  if (!data.topics.includes(topic)) {
+    return
+  }
+
   showAchievements(data);
 };
 
