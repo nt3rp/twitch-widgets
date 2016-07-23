@@ -1,16 +1,17 @@
-{
-  "bad-end": {
+[
+  {
+    "id":           "bad-end",
     "name":         "Bad End",
     "description":  "Lose against Lavos",
     "image":        "URL, or data? Can we send data?",
     "tags" :        ["ending", "in-game"]
   },
-
-  "good-end": {
+  {
+    "id":           "good-end",
     "name":         "Good End",
     "description":  "Beat Lavos!",
     "image":        "URL, or data? Can we send data?",
-    "tags" :        ["ending", "in-game"],
+    "tags" :        ["in-game"],
     "style":        "green"
   }
-}
+]

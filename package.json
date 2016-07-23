@@ -16,7 +16,9 @@
   },
   "dependencies": {
     "express": "^4.14.0",
+    "lodash": "^4.13.1",
     "vorpal": "^1.11.2",
+    "winston": "^2.2.0",
     "ws": "^1.1.1"
   }
 }

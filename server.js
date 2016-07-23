@@ -11,7 +11,6 @@ var server = require('http').createServer()
 
 app.use(express.static('widgets'));
 
-
 wss.broadcast = function (data) {
   wss.clients.forEach(function (client) {
     client.send(data);
@@ -25,7 +24,7 @@ wss.on('connection', function (ws) {
 
   ws.on('message', function (e) {
     // TODO: Do things conditionally based on message type
-    console.log(e);
+    // TODO: Should this just be another app that connects to the server?
     wss.broadcast(e)
   });
 
