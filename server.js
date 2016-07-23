@@ -33,4 +33,4 @@ wss.on('connection', function (ws) {
 });
 
 server.on('request', app);
-server.listen(port, function () { console.log('Listening on ' + server.address().port) });
+server.listen(port, "0.0.0.0", function () { console.log('Listening on ' + server.address().port) });

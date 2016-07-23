@@ -1,6 +1,9 @@
 // TODO: How to know what to connect to?
 // If accessed elsewhere on the network, won't be 'localhost'
-var connection = window.connection = new WebSocket('ws://localhost:3000/events');
+
+var server = window.location.hostname + ':' + window.location.port;
+
+var connection = window.connection = new WebSocket('ws://'+server+'/events');
 
 connection.onopen = function () {
   // Do nothing for now... maybe send something to the server?
@@ -18,11 +21,24 @@ connection.onmessage = function (e) {
   showAchievements(data);
 };
 
+var MENU_STYLES = ['default', 'green', 'blue']
+
 var showAchievement = function(achievement, data) {
   var image = achievement.querySelector('.image');
-  var title = achievement.querySelector('.name');
+  var name = achievement.querySelector('.name');
+  var description = achievement.querySelector('.description');
+  var border = achievement.querySelector('.border');
 
-  title.innerText = data.name;
+  var style = data.style;
+
+  name.innerText = data.name;
+  description.innerText = data.description;
+
+  MENU_STYLES.forEach(function(style) {
+      border.classList.remove(style);
+  })
+
+  border.classList.add(style);
   achievement.classList.add('show');
 
   setTimeout(function() {
