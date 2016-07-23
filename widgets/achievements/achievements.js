@@ -1,6 +1,3 @@
-// TODO: How to know what to connect to?
-// If accessed elsewhere on the network, won't be 'localhost'
-
 var server = window.location.hostname + ':' + window.location.port;
 
 var connection = window.connection = new WebSocket('ws://'+server+'/events');
