@@ -14,13 +14,23 @@ body {
 }
 
 .chart {
-  width: 75%;
-  height:25%;
-}
-/*
-.chart {
   background: white;
   width: 75%;
   height: 100px;
   border-bottom: 1px dotted #555;
-}*/
+  position: relative;
+}
+
+.indicator {
+  position: absolute;
+  bottom: 1em;
+  /*bottom: auto;*/
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}

@@ -26,6 +26,7 @@ track of them (as compared to having a million TODOs scattered across files).
 - [ ] Add flag to toggle show this year's progress vs last year's progress
 - [ ] Add flag to change the 'in-progress' cursor
 - [ ] Add flag to switch if the symbols are above or below the line
+- [ ] Sparkline for cash donations?
 
 ## Achievement widget
 - [ ] Add images to achievements
@@ -34,4 +35,5 @@ track of them (as compared to having a million TODOs scattered across files).
 - [ ] Scale achievement sizes
 
 ## Progress widget
+- [ ] Use local version of jquery
 - [ ] Do this!
