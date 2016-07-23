@@ -14,6 +14,14 @@ TODO:
   font-style: normal;
 }
 
+.gradient {
+  height: 100%;
+  width: 100%;
+  background: -moz-linear-gradient(bottom, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
 .achievement {
   font-family: 'Trigger-Bold';
 
@@ -30,11 +38,14 @@ TODO:
   -webkit-border-image: url(default.png) 8 repeat;
   -o-border-image: url(default.png) 8 repeat;
   border-image: url(default.png) 8 fill repeat;
+}
 
-  color: #eee;
+.achievement .name {
+  color: #f8f800;
 }
 
 .achievement .description {
+  color: #e0e0e0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
