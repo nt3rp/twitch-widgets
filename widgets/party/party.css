@@ -42,6 +42,10 @@
   color: #e0e0e0;
 }
 
+.player.inactive .content {
+  background: #f00;
+}
+
 .player .content {
   padding: 8px 11px;
 

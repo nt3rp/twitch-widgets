@@ -24,15 +24,17 @@ connection.onmessage = function (e) {
     return
   }
 
+  // TODO: Probably need more distinction between things...
   switch (data.type) {
     case 'config':
       initialize(data.party);
     break;
     default:
-      //do something
+      change(data.party);
   }
 };
 
+var partyData = {};
 var partyList = document.querySelector('#party');
 var templateStr = document.querySelector('#template-player').innerHTML.trim();
 var template = _.template(templateStr);
@@ -51,9 +53,34 @@ var initialize = function(party) {
   reset();
 
   party.forEach(function(player){
+    partyData[player.id] = player;
+
     var html = template(player)
     partyList.appendChild(strToHtml(html));
   });
 }
+
+var change = function(party) {
+  party.forEach(function(player){
+    updatePlayer(player);
+  });
+};
+
+// TODO: Need to handle adds + removes, not just changes
+var updatePlayer = function(changes) {
+  player = partyData[changes.id]
+  if (!player) {
+    return
+  }
+
+  Object.assign(player, changes);
+  partyData[player.id] = player;
+
+  var html = template(player)
+  var ui = document.querySelector('#' + changes.id);
+  if (ui) {
+    ui.parentNode.replaceChild(strToHtml(html), ui);
+  }
+};
 
 // var MENU_STYLES = ['default', 'green', 'blue']
