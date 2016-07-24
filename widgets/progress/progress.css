@@ -11,6 +11,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: 'Trigger-Bold';
 }
 
 .chart {
@@ -25,10 +26,24 @@ body {
   position: absolute;
   bottom: 1em;
   border-radius: 5em;
+  border: 2px solid #fff;
   background-color: #faa;
   min-width: 1em;
   min-height: 1em;
   /*bottom: auto;*/
+}
+
+.marker:after {
+  content: '';
+  border-top: 0.4em solid #555;
+  border-right: 0.4em solid transparent;
+  border-left: 0.4em solid transparent;
+  position: absolute;
+  left: calc(50% - 0.4em);
+}
+
+.marker .contents {
+  padding: 0.4em;
 }
 
 .marker.fundraise {

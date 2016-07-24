@@ -41,7 +41,9 @@ var logProgress = function(data) {
 var createIndicator = function(location, image, tags) {
   tags = tags || [];
 
-  var $content = $('<div>', {});
+  var $content = $('<div>', {
+    class: 'contents'
+  });
   $content.html('testing')
 
   var $indicator = $('<div />', {
@@ -60,8 +62,6 @@ var createIndicator = function(location, image, tags) {
   $chart.append($indicator);
 }
 
-// TODO: Add bubble / rounded corner around markers
-// TODO: Allow text
 // TODO: Handle overlapping events / grouping
 // TODO: Use spritesheet
 // TODO: Preload all images / indicators

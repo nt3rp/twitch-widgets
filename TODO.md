@@ -2,7 +2,7 @@
 There are so many things that this app could do. Here's how I am trying to keep
 track of them (as compared to having a million TODOs scattered across files).
 
-# OBS
+## OBS
 - [ ] Verify works cross-network
 - [ ] Verify chroma key
 
