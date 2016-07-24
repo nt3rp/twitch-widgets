@@ -3,8 +3,8 @@ var winston = require('winston');
 winston.add(winston.transports.File, { filename: 'logs/history.log' });
 winston.remove(winston.transports.Console);
 
-var achievements = require('./achievements');
-var milestones = require('./milestones');
+var achievements = require('./data/achievements');
+var milestones = require('./data/milestones');
 var vorpal = require('vorpal')();
 var WebSocket = require('ws');
 
@@ -25,6 +25,32 @@ vorpal
   .action(function(args, callback) {
     var milestone = _.find(milestones, {id: args.milestone});
     ws.send(JSON.stringify(milestone));
+    callback();
+  });
+
+  vorpal
+    .command('party load', 'Take actions on the party') // .option('-l, --list')
+    .action(function(args, callback) {
+      var party = require('./data/party');
+      ws.send(JSON.stringify({
+        "type":   "config",
+        "topics": ["party"],
+        "party":   party
+      }));
+      callback();
+    });
+
+vorpal
+  .command('party add [name]', 'Take actions on the party') // .option('-l, --list')
+  .action(function(args, callback) {
+    // var milestone = _.find(milestones, {id: args.milestone});
+    // ws.send(JSON.stringify(milestone));
+    callback();
+  });
+
+vorpal
+  .command('party remove', 'Take actions on the party') // .option('-l, --list')
+  .action(function(args, callback) {
     callback();
   });
 

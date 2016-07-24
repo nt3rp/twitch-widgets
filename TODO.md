@@ -13,6 +13,7 @@ track of them (as compared to having a million TODOs scattered across files).
 
 ## CLI
 - [ ] Refactor!
+- [ ] Make sure required arguments are `<required>` not `[optional]`
 - [ ] History / recent / log command to see what has happened lately
 - [ ] Challenge accepted / completed command
 - [ ] Find out if there is a Procfile for javascript, to autostart server + CLI

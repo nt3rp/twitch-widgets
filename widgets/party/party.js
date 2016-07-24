@@ -24,41 +24,32 @@ connection.onmessage = function (e) {
     return
   }
 
-  showAchievements(data);
+  switch (data.type) {
+    case 'config':
+      initialize(data.party);
+    break;
+    default:
+      //do something
+  }
 };
 
-var MENU_STYLES = ['default', 'green', 'blue']
+var partyList = document.querySelector('#party');
+var templateStr = document.querySelector('#template-player').innerHTML.trim();
+var template = _.template(templateStr);
 
-var showAchievement = function(achievement, data) {
-  var image = achievement.querySelector('.image');
-  var name = achievement.querySelector('.name');
-  var description = achievement.querySelector('.description');
-  var border = achievement.querySelector('.border');
+var strToHtml = function(html) {
+  var parser = new DOMParser()
+    , doc = parser.parseFromString(html, "text/html");
+  return doc.querySelector('body').firstChild;
+}
 
-  var style = data.style;
+var initialize = function(party) {
 
-  name.innerText = data.name;
-  description.innerText = data.description;
 
-  MENU_STYLES.forEach(function(style) {
-      border.classList.remove(style);
-  })
-
-  border.classList.add(style);
-  achievement.classList.add('show');
-
-  setTimeout(function() {
-    achievement.classList.remove('show');
-    achievement.classList.add('hide');
-  }, 5000)
-};
-
-// TODO: Handle achievement stacking
-var showAchievements = function(data) {
-  var achievements = document.querySelectorAll('.achievement');
-  achievements.forEach(function(element) {
-    setTimeout(function() {
-      showAchievement(element, data);
-    }, 3000)
+  party.forEach(function(player){
+    var html = template(player)
+    partyList.appendChild(strToHtml(html));
   });
-};
+}
+
+// var MENU_STYLES = ['default', 'green', 'blue']

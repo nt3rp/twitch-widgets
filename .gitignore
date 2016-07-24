@@ -1,4 +1,7 @@
 *.DS_Store
 *.log
+*.png
 node_modules
 logs
+data/
+fonts/
