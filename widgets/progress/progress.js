@@ -90,6 +90,19 @@ var createIndicator = function(config) {
   $indicator.css('visibility', 'visible')
 }
 
+var drawTicks = function () {
+  [0, 4, 8, 12, 16, 20, 24].forEach(function(number){
+    var position = (number*100/24) + '%';
+    var $tick = $('<div />', {'class': 'marker tick', 'text': number});
+    $tick.css('visibility', 'hidden');
+    $chart.append($tick);
+    var containerWidth = $tick.width() || 0;
+    var width = Math.ceil(containerWidth/2) || 0;
+    $tick.css('left', 'calc(' + position + ' - ' + width + 'px)')
+    $tick.css('visibility', 'visible');
+  });
+}();
+
 // TODO: Handle overlapping events / grouping
 // TODO: Use spritesheet
 // TODO: Preload all images / indicators

@@ -33,6 +33,15 @@ body {
   /*bottom: auto;*/
 }
 
+.marker.tick {
+  border-radius: inherit;
+  border: none;
+  background-color: inherit;
+  min-width: inherit;
+  min-height: inherit;
+  bottom: -1.5em;
+}
+
 .marker:after {
   content: '';
   border-top: 0.4em solid #555;
@@ -41,6 +50,13 @@ body {
   position: absolute;
   left: calc(50% - 0.4em);
   bottom: -0.5em;
+}
+
+.marker.tick:after {
+  border-top: 0;
+  border-bottom: 0.4em solid #555;
+  top: -0.5em;
+  bottom: auto;
 }
 
 .marker .contents {
