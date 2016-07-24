@@ -26,8 +26,8 @@ body {
   position: absolute;
   bottom: 1em;
   border-radius: 5em;
-  border: 2px solid #fff;
-  background-color: #faa;
+  border: 1px solid #fff;
+  background-color: #555;
   min-width: 1em;
   min-height: 1em;
   /*bottom: auto;*/
@@ -40,18 +40,17 @@ body {
   border-left: 0.4em solid transparent;
   position: absolute;
   left: calc(50% - 0.4em);
+  bottom: -0.5em;
 }
 
 .marker .contents {
   padding: 0.4em;
+  color: #fff;
 }
 
-.marker.fundraise {
-
-}
-
-.marker.game {
-
+.marker .icon {
+  vertical-align: middle;
+  border-radius: 2em;
 }
 
 .hide {

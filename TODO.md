@@ -5,6 +5,7 @@ track of them (as compared to having a million TODOs scattered across files).
 ## OBS
 - [ ] Verify works cross-network
 - [ ] Verify chroma key
+- [ ] What happens after long periods of time in CLR browser?
 
 ## Server
 - [ ] Have WebSocket connection send relevant information / config on connection
@@ -12,6 +13,8 @@ track of them (as compared to having a million TODOs scattered across files).
 
 ## CLI
 - [ ] Refactor!
+- [ ] History / recent / log command to see what has happened lately
+- [ ] Challenge accepted / completed command
 - [ ] Find out if there is a Procfile for javascript, to autostart server + CLI
 - [ ] Figure out how to dynamically connect to server, wherever it is
 - [ ] Handler connection failures
@@ -34,12 +37,13 @@ track of them (as compared to having a million TODOs scattered across files).
 - [ ] Add flag to toggle show this year's progress vs last year's progress
 - [ ] Add flag to change the 'in-progress' cursor
 - [ ] Add flag to switch if the symbols are above or below the line
+- [ ] Toggle the type of events to display
 - [ ] Sparkline for cash donations?
 
 ## Achievement widget
 - [ ] Add images to achievements
 - [ ] Add remaining border styles
-- [ ] Handle multiple achievements triggered at once
+- [ ] Queuing / Handle multiple achievements triggered at once
 - [ ] Scale achievement sizes
 
 ## Progress widget
