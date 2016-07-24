@@ -43,8 +43,12 @@ var strToHtml = function(html) {
   return doc.querySelector('body').firstChild;
 }
 
-var initialize = function(party) {
+var reset = function() {
+  document.querySelectorAll('.player').forEach(function(node) {node.parentNode.removeChild(node)});
+};
 
+var initialize = function(party) {
+  reset();
 
   party.forEach(function(player){
     var html = template(player)

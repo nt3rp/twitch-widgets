@@ -1,4 +1,5 @@
-var _ = require('lodash')
+var _ = require('lodash');
+var fs = require('fs');
 var winston = require('winston');
 winston.add(winston.transports.File, { filename: 'logs/history.log' });
 winston.remove(winston.transports.Console);
@@ -29,13 +30,13 @@ vorpal
   });
 
   vorpal
-    .command('party load', 'Take actions on the party') // .option('-l, --list')
+    .command('party load', 'Load the party from a file') // .option('-l, --list')
     .action(function(args, callback) {
-      var party = require('./data/party');
+      var party = fs.readFileSync(__dirname + '/data/party.json', {encoding: 'utf8'});
       ws.send(JSON.stringify({
         "type":   "config",
         "topics": ["party"],
-        "party":   party
+        "party":   JSON.parse(party)
       }));
       callback();
     });
