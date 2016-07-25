@@ -65,6 +65,19 @@ vorpal
     callback();
   });
 
+vorpal
+  .command('party edit <id>', 'Take actions on the party')
+  .option('-s, --status <status>', 'Out-of-game status')
+  .action(function(args, callback) {
+    var player = Object.assign({id: args.id}, args.options)
+    ws.send(JSON.stringify({
+      "type":   "event",
+      "topics": ["party"],
+      "party":  [player]
+    }));
+    callback();
+  });
+
 vorpal.on('client_command_executed', function(cmd) {
   winston.info(cmd.command);
 })

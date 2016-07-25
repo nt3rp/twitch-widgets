@@ -41,6 +41,9 @@ track of them (as compared to having a million TODOs scattered across files).
 - [ ] Toggle the type of events to display
 - [ ] Sparkline for cash donations?
 
+### Player
+- [ ] Mass actions on status, etc.
+
 ## Achievement widget
 - [ ] Add images to achievements
 - [ ] Add remaining border styles
