@@ -83,4 +83,8 @@ var updatePlayer = function(changes) {
   }
 };
 
+var updatePlaytime = function() {
+
+}
+
 // var MENU_STYLES = ['default', 'green', 'blue']

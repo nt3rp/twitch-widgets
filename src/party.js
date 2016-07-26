@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var moment = require('moment');
 var fs = require('fs');
 var fsAutocomplete = require('vorpal-autocomplete-fs');
 
@@ -31,6 +32,13 @@ module.exports = function(vorpal, config) {
       var filepath = args.filepath || defaults.file;
       var fsParty = fs.readFileSync(filepath, {encoding: 'utf8'});
       var jsParty = JSON.parse(fsParty);
+      var now = new Date();
+      jsParty.forEach(function(member) {
+        member.playtimes = member.playtimes || [now];
+        member.playtimes = member.playtimes.map(function(playtime) {
+          return new Date(playtime);
+        });
+      });
       party = _.clone(jsParty);
 
       send({
@@ -58,14 +66,24 @@ module.exports = function(vorpal, config) {
     .option('-n, --name <name>', 'Displayed name')
     .option('-o, --group <group>', 'Displayed org')
     .option('-c, --contact <contact>', 'Displayed contact')
+    .option('--reset-airtimes', 'Reset airtimes')
     .action(function(args, callback) {
       if (args.options.inactive) {
         args.options.active = false;
         delete args.options.inactive;
       }
 
+      var now = new Date();
       var target = (args.id) ? [_.find(party, {'id': args.id})] : party;
       target.forEach(function(member) {
+        if (args.options['reset-airtimes']) {
+          member.playtimes = [now];
+        }
+
+        if ((args.options.active === false && member.active === true) ||
+            (args.options.active === true && member.active === false)) {
+          member.playtimes.push(now)
+        }
         Object.assign(member, args.options);
       });
 
@@ -73,6 +91,23 @@ module.exports = function(vorpal, config) {
         "type":   EVENT_MESSAGE,
         "topics": defaults.topics,
         "party":  target
+      });
+      callback();
+    });
+
+  vorpal
+    .command('party airtime [id]', 'Find the airtime of a player')
+    .action(function(args, callback) {
+      var that = this;
+      var target = (args.id) ? [_.find(party, {'id': args.id})] : party;
+
+      target.forEach(function(member) {
+        var airtime = _(member.playtimes).chunk(2).map(function(pair) {
+          var end = _.nth(pair, 1) || new Date();
+          var start = _.first(pair);
+          return end - start;
+        }).sum()
+        that.log(`${member.name}: ${moment.utc(airtime).format('HH:mm:ss.SSS')}`);
       });
       callback();
     });

@@ -17,6 +17,7 @@
   "dependencies": {
     "express": "^4.14.0",
     "lodash": "^4.13.1",
+    "moment": "^2.14.1",
     "vorpal": "^1.11.2",
     "vorpal-autocomplete-fs": "0.0.3",
     "winston": "^2.2.0",
