@@ -53,12 +53,16 @@ module.exports = function(vorpal, config) {
     .command('party edit [id]', 'Take actions on the party')
     // .allowUnknownOptions() – Not released yet
     .option('-s, --status <status>', 'Out-of-game status', ['asleep', ''])
-    .option('-a, --active', 'On-stream; if not present, assumed to be off-stream')
+    .option('-a, --active', 'On stream')
+    .option('-i, --inactive', 'Off stream')
     .option('-n, --name <name>', 'Displayed name')
     .option('-o, --group <group>', 'Displayed org')
     .option('-c, --contact <contact>', 'Displayed contact')
     .action(function(args, callback) {
-      args.options.active = args.options.active || false;
+      if (args.options.inactive) {
+        args.options.active = false;
+        delete args.options.inactive;
+      }
 
       var target = (args.id) ? [_.find(party, {'id': args.id})] : party;
       target.forEach(function(member) {
