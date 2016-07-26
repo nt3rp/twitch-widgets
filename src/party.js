@@ -42,6 +42,14 @@ module.exports = function(vorpal, config) {
     });
 
   vorpal
+    .command('party save [filepath]', 'Save party to JSON')
+    .action(function(args, callback) {
+      var filepath = args.filepath || defaults.file;
+      fs.writeFileSync(filepath, JSON.stringify(party, null, 2));
+      callback();
+    });
+
+  vorpal
     .command('party edit [id]', 'Take actions on the party')
     // .allowUnknownOptions() – Not released yet
     .option('-s, --status <status>', 'Out-of-game status', ['asleep', ''])
@@ -56,7 +64,6 @@ module.exports = function(vorpal, config) {
       target.forEach(function(member) {
         Object.assign(member, args.options);
       });
-      this.log(target)
 
       send({
         "type":   EVENT_MESSAGE,
