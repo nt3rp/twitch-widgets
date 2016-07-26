@@ -69,6 +69,85 @@ body {
   border-radius: 2em;
 }
 
+.icon {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  background-image: url('bosses.png');
+}
+
+.icon.yakra {
+  background-position-x: 0px;
+}
+
+.icon.dragon-tank {
+  background-position-x: -48px;
+}
+
+.icon.guardian {
+  background-position-x: -96px;
+}
+
+.icon.r-series {
+  background-position-x: -144px;
+}
+
+.icon.heckran {
+  background-position-x: -192px;
+}
+
+.icon.zombor {
+  background-position-x: -240px;
+}
+
+.icon.masamune {
+  background-position-x: -288px;
+}
+
+.icon.nizbel {
+  background-position-x: -336px;
+}
+
+.icon.magus {
+  background-position-x: -384px;
+}
+
+.icon.tyranno {
+  background-position-x: -432px;
+}
+
+.icon.golem {
+  background-position-x: -480px;
+}
+
+.icon.beast {
+  background-position-x: -528px;
+}
+
+.icon.giga-gaia {
+  background-position-x: -576px;
+}
+
+.icon.dalton {
+  background-position-x: -624px;
+}
+
+.icon.golem-twins {
+  background-position-x: -672px;
+}
+
+.icon.lavos {
+  background-position-x: -720px;
+}
+
+.icon.dalton-plus {
+  background-position-x: -768px;
+}
+
+.icon.lavos-final {
+  background-position-x: -816px;
+}
+
 .hide {
   display: none;
 }

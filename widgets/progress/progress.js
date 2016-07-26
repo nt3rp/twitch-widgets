@@ -41,10 +41,8 @@ var logProgress = function(data) {
   if (data.tags) {
     if (!data.tags.includes('game')) {
       label = data.name
-    } else if (data.tags.includes('ending')) {
-      icon = 'lavos.png'
-    } else if (data.tags.includes('game')) {
-      icon = 'nu.png'
+    } else if (data.tags.includes('boss')) {
+      icon = data.id
     }
   }
 
@@ -66,7 +64,7 @@ var createIndicator = function(config) {
 
   var $content = $('<div>', {class: 'contents'});
   if (icon) {
-    $content.append($('<img />', {src: icon, class: 'icon'}));
+    $content.append($('<span />', {class: 'icon ' + icon}));
   }
   if (label) {
     $content.append($('<span />', {class: 'label', text: label}))
