@@ -29,54 +29,7 @@ vorpal
     callback();
   });
 
-  vorpal
-    .command('party load', 'Load the party from a file') // .option('-l, --list')
-    .action(function(args, callback) {
-      // TODO: Is there a way to read a file as JSON?
-      // TODO: Keep a record of the actual party somewhere so that we can autocomplete
-      var party = fs.readFileSync(__dirname + '/data/party.json', {encoding: 'utf8'});
-      ws.send(JSON.stringify({
-        "type":   "config",
-        "topics": ["party"],
-        "party":   JSON.parse(party)
-      }));
-      callback();
-    });
-
-vorpal
-  .command('party remove <id>', 'Take actions on the party') // .option('-l, --list')
-  .action(function(args, callback) {
-    ws.send(JSON.stringify({
-      "type":   "event",
-      "topics": ["party"],
-      "party":  [{id: args.id, 'active': false}]
-    }));
-    callback();
-  });
-
-vorpal
-  .command('party add <id>', 'Take actions on the party') // .option('-l, --list')
-  .action(function(args, callback) {
-    ws.send(JSON.stringify({
-      "type":   "event",
-      "topics": ["party"],
-      "party":  [{id: args.id, 'active': true}]
-    }));
-    callback();
-  });
-
-vorpal
-  .command('party edit <id>', 'Take actions on the party')
-  .option('-s, --status <status>', 'Out-of-game status')
-  .action(function(args, callback) {
-    var player = Object.assign({id: args.id}, args.options)
-    ws.send(JSON.stringify({
-      "type":   "event",
-      "topics": ["party"],
-      "party":  [player]
-    }));
-    callback();
-  });
+vorpal.use(require('./src/party'), {websocket: ws})
 
 vorpal.on('client_command_executed', function(cmd) {
   winston.info(cmd.command);

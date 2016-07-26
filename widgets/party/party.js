@@ -37,6 +37,7 @@ connection.onmessage = function (e) {
 var partyData = {};
 var partyList = document.querySelector('#party');
 var templateStr = document.querySelector('#template-player').innerHTML.trim();
+// TODO: Fix bug where underscore template can't find values
 var template = _.template(templateStr);
 
 var strToHtml = function(html) {
