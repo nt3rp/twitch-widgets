@@ -53,8 +53,6 @@ var initialize = function(party) {
   reset();
 
   party.forEach(function(player){
-    partyData[player.id] = player;
-
     var html = template(player)
     partyList.appendChild(strToHtml(html));
   });
@@ -67,24 +65,16 @@ var change = function(party) {
 };
 
 // TODO: Need to handle adds + removes, not just changes
+// TODO: Add actual playtime clock
 var updatePlayer = function(changes) {
-  player = partyData[changes.id]
-  if (!player) {
-    return
-  }
-
-  Object.assign(player, changes);
-  partyData[player.id] = player;
-
-  var html = template(player)
+  // Stop any existing ticking
+  // Update the playtime to the server value
+  // start the ticker again, if active
+  var html = template(changes)
   var ui = document.querySelector('#' + changes.id);
   if (ui) {
     ui.parentNode.replaceChild(strToHtml(html), ui);
   }
 };
-
-var updatePlaytime = function() {
-
-}
 
 // var MENU_STYLES = ['default', 'green', 'blue']
