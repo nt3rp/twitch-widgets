@@ -34,7 +34,7 @@ module.exports = function(vorpal, config) {
       var jsParty = JSON.parse(fsParty);
       var now = new Date();
       jsParty.forEach(function(member) {
-        member.playtimes = member.playtimes || [now];
+        member.playtimes = member.playtimes || [];
         member.playtimes = member.playtimes.map(function(playtime) {
           return new Date(playtime);
         });
@@ -54,6 +54,17 @@ module.exports = function(vorpal, config) {
     .action(function(args, callback) {
       var filepath = args.filepath || defaults.file;
       fs.writeFileSync(filepath, JSON.stringify(party, null, 2));
+      callback();
+    });
+
+  vorpal
+    .command('party show [id]', 'Show details of a player')
+    .action(function(args, callback) {
+      var that = this;
+      var target = (args.id) ? [_.find(party, {'id': args.id})] : party;
+      target.forEach(function(member) {
+        that.log(member);
+      });
       callback();
     });
 
@@ -81,7 +92,7 @@ module.exports = function(vorpal, config) {
         }
 
         if ((args.options.active === false && member.active === true) ||
-            (args.options.active === true && member.active === false)) {
+            (args.options.active === true && !member.active)) {
           member.playtimes.push(now)
         }
         Object.assign(member, args.options);
