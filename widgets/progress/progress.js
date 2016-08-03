@@ -2,7 +2,7 @@
 
 var ProgressWidget = (function(w, $, _) {
   var me = {}
-    , topic = 'progress'
+    , topic = 'eventlog'
     , $chart = $('.chart')
     , $curr = $('#current')
     , start = new Date(2016, 6, 24, 10, 0, 0)
