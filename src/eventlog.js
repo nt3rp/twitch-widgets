@@ -26,8 +26,8 @@ module.exports = function(vorpal, config) {
   // Configure
 
   // TODO: timestamp
-  // TODO: Fix description
   // TODO: Show in progress or achievement (either, or, both)
+  // TODO: Toggle show / hide of different timeline events
 
   vorpal
     .command('log [name]', 'Log an event in time')
