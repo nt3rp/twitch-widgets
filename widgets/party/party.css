@@ -71,6 +71,14 @@
   background-position-x: 0px !important;
 }
 
+.player.inactive.animate .icon {
+  animation: idle .8s steps(3) infinite alternate;
+}
+
+.player.inactive.animate .icon.lucca, .player.inactive.animate .icon.ayla {
+  animation: short_idle .8s steps(2) infinite alternate;
+}
+
 .player .icon {
   background-position-x: -96px;
 }
@@ -112,6 +120,15 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* Animations */
+@keyframes idle {
+    100% { background-position-x: -96px }
+}
+
+@keyframes short_idle {
+    100% { background-position-x: -64px }
 }
 
 /* Styles */

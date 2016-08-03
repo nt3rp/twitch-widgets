@@ -71,6 +71,8 @@ module.exports = function(vorpal, config) {
   vorpal
     .command('party edit [id]', 'Take actions on the party')
     // .allowUnknownOptions() – Not released yet
+    .option('--animate', 'Enable animations')
+    .option('--deanimate', 'Disable animations')
     .option('-s, --status <status>', 'Out-of-game status', ['asleep', 'confused'])
     .option('-a, --active', 'On stream')
     .option('-i, --inactive', 'Off stream')
@@ -82,6 +84,11 @@ module.exports = function(vorpal, config) {
       if (args.options.inactive) {
         args.options.active = false;
         delete args.options.inactive;
+      }
+
+      if (args.options.deanimate) {
+        args.options.animate = false;
+        delete args.options.deanimate;
       }
 
       var now = new Date();
