@@ -79,6 +79,28 @@
   animation: short_idle .8s steps(2) infinite alternate;
 }
 
+.player.animate .icon {
+  animation: active .8s steps(3) infinite;
+}
+
+.player.animate .icon.magus {
+  animation: short_active .8s steps(2) infinite alternate;
+}
+
+.player.animate .icon.confused {
+  animation: confused .8s steps(2) infinite alternate;
+}
+
+.player.animate .icon.asleep {
+  animation: none;
+}
+
+.player.animate .icon.asleep.crono {
+  animation: asleep .8s steps(2) infinite alternate;
+}
+
+
+
 .player .icon {
   background-position-x: -96px;
 }
@@ -129,6 +151,22 @@
 
 @keyframes short_idle {
     100% { background-position-x: -64px }
+}
+
+@keyframes active {
+    100% { background-position-x: -192px }
+}
+
+@keyframes short_active {
+    100% { background-position-x: -160px }
+}
+
+@keyframes confused {
+    100% { background-position-x: -256px }
+}
+
+@keyframes asleep {
+    100% { background-position-x: -352px }
 }
 
 /* Styles */
