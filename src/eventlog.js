@@ -12,10 +12,6 @@ module.exports = function(vorpal, config) {
   var CONFIG_MESSAGE = 'config';
   var EVENT_MESSAGE = 'event';
 
-  var defaults = {
-    topics: ['eventlog']
-  };
-
   // TODO: Send timestamp?
   var send = function(data) {
     return websocket.send(JSON.stringify(data));
@@ -30,24 +26,26 @@ module.exports = function(vorpal, config) {
   // TODO: Toggle show / hide of different timeline events
 
   vorpal
-    .command('log [name]', 'Log an event in time')
+    .command('log [event]', 'Log an event in time')
     .autocomplete(_.map(events, 'id'))
     .option('-n, --name <name>', 'Name of event')
     .option('-d, --description <description>', 'Description of event')
-    .option('-t, --tags <tags...>', 'Tags of event')
+    .option('-t, --tags <tags>', 'Tags of event')  // Variadic args not supported on tags
     .action(function(args, callback) {
-      var event = _.find(events, {id: args.name});
+      var event = _.find(events, {id: args.event});
 
       // Must be a custom event
       if (!event) {
         event = {
           name: args.options.name || '',
           description: args.options.description || '',
-          tags: args.options.tags || []
+          tags: (args.options.tags || '').split(' ') || []
         };
       }
 
-      send(_.merge({type: EVENT_MESSAGE, topics: defaults.topics}, event));
+      this.log(event)
+
+      send(_.merge({type: EVENT_MESSAGE}, event));
       callback();
     });
 };

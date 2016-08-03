@@ -2,7 +2,7 @@
 
 var ProgressWidget = (function(w, $, _) {
   var me = {}
-    , topic = 'eventlog'
+    , tags = ['timeline']
     , $chart = $('.chart')
     , $curr = $('#current')
     , start = new Date(2016, 6, 24, 10, 0, 0)
@@ -26,7 +26,7 @@ var ProgressWidget = (function(w, $, _) {
   me.onMessage = function(msg) {
     var data = JSON.parse(msg.data);
 
-    if (_.isEmpty(data) || !_.includes(data.topics, topic)) {
+    if (_.isEmpty(data) || _(tags).intersection(data.tags).isEmpty()) {
       return
     }
 
@@ -49,12 +49,15 @@ var ProgressWidget = (function(w, $, _) {
 
     // This should probably be managed by classes,
     // but for now, we only have a small set of icons to handle
-    if (data.tags) {
-      if (!_.includes(data.tags, 'game')) {
-        label = data.name
-      } else if (_.includes(data.tags, 'boss')) {
-        icon = data.id
-      }
+    if (!_.includes(data.tags, 'timeline')) {
+      return
+    }
+
+    // Either icon OR label
+    if (data.icon) {
+      icon = data.icon;
+    } else {
+      label = data.name;
     }
 
     this.createIndicator({
