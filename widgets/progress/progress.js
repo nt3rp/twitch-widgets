@@ -13,7 +13,7 @@ var ProgressWidget = (function(w, $, _) {
   };
 
   me.getWebSocketConnection = function () {
-    // TODO: What about existing connection;
+    // TODO: What about existing connections?
     var host = this.getWSHost();
     return new WebSocket('ws://'+host+'/events');
   };
@@ -30,12 +30,15 @@ var ProgressWidget = (function(w, $, _) {
       return
     }
 
-    // Deal with configuration message, especially for setting up progress bar
-
-    this.logProgress(data);
+    switch (data.type) {
+      case 'config':
+        // TODO: Handle configure messages
+        // TODO: Maybe 'configure' is a message topic?
+      break;
+      default:
+        this.logProgress(data);
+    }
   };
-
-
 
   // TODO: Clear / change / track symbols
   me.logProgress = function (data) {
@@ -107,6 +110,12 @@ var ProgressWidget = (function(w, $, _) {
     });
   };
 
+  me.startProgress = function() {
+    // Get the current position in time
+    // Remove the old current indicator
+    // Add a new indicator
+  };
+
   me.init = function() {
     this.connection = this.getWebSocketConnection();
     this.connection.onopen = this.onOpen.bind(this);
@@ -114,6 +123,7 @@ var ProgressWidget = (function(w, $, _) {
     this.connection.onmessage = this.onMessage.bind(this);
 
     this.drawTicks();
+    this.startProgress();
   };
 
   me.init();
