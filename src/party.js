@@ -71,7 +71,7 @@ module.exports = function(vorpal, config) {
   vorpal
     .command('party edit [id]', 'Take actions on the party')
     // .allowUnknownOptions() – Not released yet
-    .option('-s, --status <status>', 'Out-of-game status', ['asleep', ''])
+    .option('-s, --status <status>', 'Out-of-game status', ['asleep', 'confused'])
     .option('-a, --active', 'On stream')
     .option('-i, --inactive', 'Off stream')
     .option('-n, --name <name>', 'Displayed name')

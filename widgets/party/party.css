@@ -59,18 +59,48 @@
   min-width: 0; /* http://stackoverflow.com/a/34945744 */
 }
 
-/*  TODO: Unite into one sprite sheet with proper dimensions */
 .player .icon {
-  width: 20px;
-  height: 44px;
-  text-align:center;
+  width: 32px;
+  height: 48px;
+  text-align: center;
   flex: none;
+  background-image: url('characters.png');
+}
+
+.player.inactive .icon {
+  background-position-x: 0px !important;
+}
+
+.player .icon {
+  background-position-x: -96px;
+}
+
+.player .icon.confused {
+  background-position-x: -192px !important;
+}
+
+.player .icon.asleep {
+  background-position-x: -288px !important;
 }
 
 .player .icon.crono {
-  background-image: url('crono.png');
-  background-position-x: -57px;
-  background-position-y: -9px; -53px
+  background-position-y: 0px !important;
+}
+
+.player .icon.lucca {
+  background-position-y: -48px !important;
+}
+
+.player .icon.frog {
+  background-position-y: -96px !important;
+}
+
+.player .icon.ayla {
+  background-position-y: -144px !important;
+}
+
+.player .icon.magus {
+  background-position-y: -192px !important;
 }
 
 .player .name {
