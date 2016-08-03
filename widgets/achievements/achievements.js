@@ -1,6 +1,6 @@
 var server = window.location.hostname + ':' + window.location.port;
 var connection = window.connection = new WebSocket('ws://'+server+'/events');
-var topic = 'achievements';
+var topic = 'eventlog';
 
 connection.onopen = function () {
   // Do nothing for now... maybe send something to the server?
@@ -24,7 +24,14 @@ connection.onmessage = function (e) {
     return
   }
 
-  showAchievements(data);
+  switch (data.type) {
+    case 'config':
+      // TODO: Handle configure messages
+      // TODO: Maybe 'configure' is a message topic?
+    break;
+    default:
+      showAchievements(data);
+  }
 };
 
 var MENU_STYLES = ['default', 'green', 'blue']

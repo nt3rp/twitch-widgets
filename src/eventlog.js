@@ -21,21 +21,20 @@ module.exports = function(vorpal, config) {
     return websocket.send(JSON.stringify(data));
   }
 
-  // TODO: tie into achievements? Difference?
-  // Log named event
-  // Log unnamed event
   // Save progress
   // Load progress
   // Configure
 
-  // Very similar to achievements...
+  // TODO: timestamp
+  // TODO: Fix description
+  // TODO: Show in progress or achievement (either, or, both)
 
   vorpal
     .command('log [name]', 'Log an event in time')
     .autocomplete(_.map(events, 'id'))
     .option('-n, --name <name>', 'Name of event')
     .option('-d, --description <description>', 'Description of event')
-    .option('-t, --tags <tags...>', 'Tags of event')  // How to do list?
+    .option('-t, --tags <tags...>', 'Tags of event')
     .action(function(args, callback) {
       var event = _.find(events, {id: args.name});
 
