@@ -87,9 +87,6 @@ var ProgressWidget = (function(w, $, _) {
     // Bug: Need to calculate image size properly
     // for now, assume all images are 48px wide... and fix later
     var containerWidth = $indicator.width() || 0;
-    if (icon) {
-      containerWidth += 48;
-    }
     var width = Math.ceil(containerWidth/2) || 0;
     $indicator.css({left: 'calc(' + position + ' - ' + width + 'px)'})
 
