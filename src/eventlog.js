@@ -43,8 +43,6 @@ module.exports = function(vorpal, config) {
         };
       }
 
-      this.log(event)
-
       send(_.merge({type: EVENT_MESSAGE}, event));
       callback();
     });

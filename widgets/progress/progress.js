@@ -54,12 +54,6 @@ var ProgressWidget = (function(w, $, _) {
       , label = ''
       , position = me.calculatePosition();
 
-    // This should probably be managed by classes,
-    // but for now, we only have a small set of icons to handle
-    if (!_.includes(data.tags, 'timeline')) {
-      return
-    }
-
     // Either icon OR label
     if (data.icon) {
       icon = data.icon;
