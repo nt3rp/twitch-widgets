@@ -51,7 +51,9 @@ var showAchievement = function(achievement, data) {
       border.classList.remove(style);
   })
 
-  border.classList.add(style);
+  if (style) {
+    border.classList.add(style);
+  }
   achievement.classList.add('show');
 
   setTimeout(function() {

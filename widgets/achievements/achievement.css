@@ -50,10 +50,11 @@ body {
 }
 
 .achievement .image {
-  /*height: 64px;*/
+  height: 64px;
   width: 64px;
   text-align:center;
   flex: none;
+  background-image: url('icons.png');
 }
 
 .achievement .name {
