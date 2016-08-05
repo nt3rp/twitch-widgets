@@ -2,11 +2,12 @@
 
 var ProgressWidget = (function(w, $, _) {
   var me = {}
+    , refreshRate = 60*1000
     , tags = ['timeline']
     , $chart = $('.chart')
     , $curr = $('#current')
-    , start = new Date(2016, 6, 24, 10, 0, 0)
-    , end = new Date(2016, 6, 24, 15, 0, 0);
+    , start = new Date(2016, 7, 4, 22, 0, 0) // TODO: Configure this somehow... maybe just make end time relative to start?
+    , end = new Date(2016, 7, 4, 23, 0, 0);
 
   me.getWSHost = function() {
     return w.location.hostname + ':' + w.location.port;
@@ -40,12 +41,18 @@ var ProgressWidget = (function(w, $, _) {
     }
   };
 
+  me.calculatePosition = function(now) {
+    if (!now) {
+      now = new Date();
+    }
+    return ((now - start)*100) / (end-start) + '%'
+  }
+
   // TODO: Clear / change / track symbols
   me.logProgress = function (data) {
     var icon = ''
       , label = ''
-      , now = new Date()
-      , position = ((now - start)*100) / (end-start) + '%';
+      , position = me.calculatePosition();
 
     // This should probably be managed by classes,
     // but for now, we only have a small set of icons to handle
@@ -71,6 +78,7 @@ var ProgressWidget = (function(w, $, _) {
     var position = config.position || '0%';
     var icon = config.icon || false;
     var label = config.label || false;
+    var id = config.id
 
     if (!(label || icon)) {
       return;
@@ -84,7 +92,7 @@ var ProgressWidget = (function(w, $, _) {
       $content.append($('<span />', {class: 'label', text: label}))
     }
 
-    var $indicator = $('<div />', {class: 'marker'});
+    var $indicator = $('<div />', {class: 'marker', id: id});
     $indicator.append($content);
 
     $indicator.css('visibility', 'hidden')
@@ -113,10 +121,13 @@ var ProgressWidget = (function(w, $, _) {
     });
   };
 
-  me.startProgress = function() {
-    // Get the current position in time
-    // Remove the old current indicator
-    // Add a new indicator
+  me.drawProgress = function() {
+    $('#current').remove();
+    me.createIndicator({
+      position: me.calculatePosition()
+      , icon: 'current'
+      , id: 'current'
+    });
   };
 
   me.init = function() {
@@ -126,7 +137,10 @@ var ProgressWidget = (function(w, $, _) {
     this.connection.onmessage = this.onMessage.bind(this);
 
     this.drawTicks();
-    this.startProgress();
+    this.drawProgress();
+    w.setInterval(function() {
+      me.drawProgress();
+    }, refreshRate)
   };
 
   me.init();

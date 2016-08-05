@@ -79,6 +79,22 @@ body {
   background-image: url('bosses.png');
 }
 
+#current.marker {
+  background-color: inherit;
+}
+
+#current .icon {
+  height: 28px;
+  width: 34px;
+  background-image: url('current.png');
+  background-position-x: 0px;
+  animation: fly .8s steps(2) infinite;
+}
+
+@keyframes fly {
+    100% { background-position-x: -68px; }
+}
+
 .icon.yakra {
   background-position-x: 0px;
 }
