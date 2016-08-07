@@ -8,6 +8,7 @@ module.exports = function(vorpal, config) {
   // TODO: Handle logging, reconnecting, etc?
   // TODO: Perhaps this module is the thing that should be wrapped, not the individual commands?
   var websocket = config.websocket;
+  var log = config.log;
 
   var CONFIG_MESSAGE = 'config';
   var EVENT_MESSAGE = 'event';
@@ -31,6 +32,11 @@ module.exports = function(vorpal, config) {
     .option('-n, --name <name>', 'Name of event')
     .option('-d, --description <description>', 'Description of event')
     .option('-t, --tags <tags>', 'Tags of event')  // Variadic args not supported on tags
+    .validate(function(args) {
+      if (_.isEmpty(args.event) || _.isEmpty(args.options)) {
+        return "You must specify an 'event' or provide details. Try --help"
+      }
+    })
     .action(function(args, callback) {
       var event = _.find(events, {id: args.event});
 
@@ -42,6 +48,11 @@ module.exports = function(vorpal, config) {
           tags: (args.options.tags || '').split(' ') || []
         };
       }
+
+      log.info({
+        'command': 'log [event]',
+        'args': args
+      });
 
       send(_.merge({type: EVENT_MESSAGE}, event));
       callback();

@@ -9,12 +9,8 @@ var WebSocket = require('ws');
 
 var ws = new WebSocket('ws://localhost:3000/events');
 
-vorpal.use(require('./src/eventlog'), {websocket: ws})
-vorpal.use(require('./src/party'), {websocket: ws})
-
-vorpal.on('client_command_executed', function(cmd) {
-  winston.info(cmd.command);
-})
+vorpal.use(require('./src/eventlog'), {websocket: ws, log: winston})
+vorpal.use(require('./src/party'), {websocket: ws, log: winston})
 
 vorpal
   .delimiter('twitch-widgets >')
