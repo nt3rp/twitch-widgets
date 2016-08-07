@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var moment = require('moment');
 var fs = require('fs');
-var events = require('../data/events')
+var fsAutocomplete = require('vorpal-autocomplete-fs');
 
 module.exports = function(vorpal, config) {
   // TODO: Check if provided with a websocket connection
@@ -13,10 +13,47 @@ module.exports = function(vorpal, config) {
   var CONFIG_MESSAGE = 'config';
   var EVENT_MESSAGE = 'event';
 
+  var defaults = {
+    file: 'data/events',
+  }
+
+  var events = [];
+
   // TODO: Send timestamp?
   var send = function(data) {
     return websocket.send(JSON.stringify(data));
   }
+
+  // https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L803
+  var slugify = function (string) {
+    return _(string).toString().trim().toLowerCase().replace(/ /g, '-').replace(/([^a-zA-Z0-9\._-]+)/, '');
+  }
+
+  var reloadEvents = function(filepath) {
+    var path = filepath || `${defaults.file}.json`;
+    var fsEvents = fs.readFileSync(path, {encoding: 'utf8'});
+    var jsEvents = JSON.parse(fsEvents);
+    events = _.clone(jsEvents);
+  };
+
+  reloadEvents();
+
+  vorpal
+    .command('save-events [filepath]', 'Load events from JSON file')
+    .autocomplete(fsAutocomplete())
+    .action(function(args, callback) {
+      var filepath = args.filepath || `${defaults.file}-${(new Date()).getTime()}.json`;
+      fs.writeFileSync(filepath, JSON.stringify(events, null, 2));
+      callback();
+    });
+
+  vorpal
+    .command('reload-events [filepath]', 'Load events from JSON file')
+    .autocomplete(fsAutocomplete())
+    .action(function(args, callback) {
+      reloadEvents();
+      callback();
+    });
 
   // Save progress
   // Load progress
@@ -28,13 +65,17 @@ module.exports = function(vorpal, config) {
 
   vorpal
     .command('log [event]', 'Log an event in time')
-    .autocomplete(_.map(events, 'id'))
+    .autocomplete({data: function() {return _.map(events, 'id');}})
     .option('-n, --name <name>', 'Name of event')
     .option('-d, --description <description>', 'Description of event')
-    .option('-t, --tags <tags>', 'Tags of event')  // Variadic args not supported on tags
+    .option('-t, --tags <tags>', 'Tags of event. Space-separated string.')  // Variadic args not supported on tags
     .validate(function(args) {
       if (_.isEmpty(args.event) && _.isEmpty(args.options)) {
-        return "You must specify an 'event' or provide details. Try --help"
+        return "You must specify an 'event' or provide details. Try --help";
+      }
+
+      if(_.isEmpty(args.event) && !args.options.name) {
+        return "Must specify a name if creating an event";
       }
     })
     .action(function(args, callback) {
@@ -43,10 +84,12 @@ module.exports = function(vorpal, config) {
       // Must be a custom event
       if (!event) {
         event = {
+          id: slugify(args.options.name),
           name: args.options.name || '',
           description: args.options.description || '',
           tags: (args.options.tags || '').split(' ') || []
         };
+        events.push(event);
       }
 
       log.info({
