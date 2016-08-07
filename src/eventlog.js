@@ -33,7 +33,7 @@ module.exports = function(vorpal, config) {
     .option('-d, --description <description>', 'Description of event')
     .option('-t, --tags <tags>', 'Tags of event')  // Variadic args not supported on tags
     .validate(function(args) {
-      if (_.isEmpty(args.event) || _.isEmpty(args.options)) {
+      if (_.isEmpty(args.event) && _.isEmpty(args.options)) {
         return "You must specify an 'event' or provide details. Try --help"
       }
     })

@@ -86,7 +86,7 @@ module.exports = function(vorpal, config) {
     .option('--reset-airtimes', 'Reset airtimes')
     .autocomplete({data: function() { return _.map(party, 'id'); }})
     .validate(function(args) {
-      if (_.isEmpty(args.id) || _.isEmpty(args.options)) {
+      if (_.isEmpty(args.id) && _.isEmpty(args.options)) {
         return "You must specify an 'id' or provide details. Try --help"
       }
     })
