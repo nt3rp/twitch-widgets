@@ -9,6 +9,7 @@ module.exports = function(vorpal, config) {
   // TODO: Perhaps this module is the thing that should be wrapped, not the individual commands?
   // TODO: Keep track of party here
   var websocket = config.websocket;
+  var log = config.log;
 
   var CONFIG_MESSAGE = 'config';
   var EVENT_MESSAGE = 'event';
@@ -46,6 +47,7 @@ module.exports = function(vorpal, config) {
         "topics": defaults.topics,
         "party":  party
       });
+
       callback();
     });
 
@@ -54,6 +56,7 @@ module.exports = function(vorpal, config) {
     .action(function(args, callback) {
       var filepath = args.filepath || defaults.file;
       fs.writeFileSync(filepath, JSON.stringify(party, null, 2));
+
       callback();
     });
 
@@ -80,6 +83,11 @@ module.exports = function(vorpal, config) {
     .option('-o, --group <group>', 'Displayed org')
     .option('-c, --contact <contact>', 'Displayed contact')
     .option('--reset-airtimes', 'Reset airtimes')
+    .validate(function(args) {
+      if (_.isEmpty(args.id) || _.isEmpty(args.options)) {
+        return "You must specify an 'id' or provide details. Try --help"
+      }
+    })
     .action(function(args, callback) {
       if (args.options.inactive) {
         args.options.active = false;
@@ -110,6 +118,13 @@ module.exports = function(vorpal, config) {
         "topics": defaults.topics,
         "party":  target
       });
+
+      log.info({
+        'command': 'party edit [id]',
+        'args': args,
+        'party': target
+      });
+
       callback();
     });
 
