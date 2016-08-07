@@ -62,6 +62,7 @@ module.exports = function(vorpal, config) {
 
   vorpal
     .command('party show [id]', 'Show details of a player')
+    .autocomplete({data: function() { return _.map(party, 'id'); }})
     .action(function(args, callback) {
       var that = this;
       var target = (args.id) ? [_.find(party, {'id': args.id})] : party;
@@ -83,6 +84,7 @@ module.exports = function(vorpal, config) {
     .option('-o, --group <group>', 'Displayed org')
     .option('-c, --contact <contact>', 'Displayed contact')
     .option('--reset-airtimes', 'Reset airtimes')
+    .autocomplete({data: function() { return _.map(party, 'id'); }})
     .validate(function(args) {
       if (_.isEmpty(args.id) || _.isEmpty(args.options)) {
         return "You must specify an 'id' or provide details. Try --help"
@@ -130,6 +132,7 @@ module.exports = function(vorpal, config) {
 
   vorpal
     .command('party airtime [id]', 'Find the airtime of a player')
+    .autocomplete({data: function() { return _.map(party, 'id'); }})
     .action(function(args, callback) {
       var that = this;
       var target = (args.id) ? [_.find(party, {'id': args.id})] : party;
