@@ -9,6 +9,13 @@ var WebSocket = require('ws');
 
 var ws = new WebSocket('ws://localhost:3000/events');
 
+ws.on('message', function(data) {
+  var msg = JSON.parse(data);
+  if (msg.type !== "CLI") return;
+  vorpal.log("Received command from web: " + msg.command);
+  vorpal.execSync(msg.command);
+})
+
 vorpal.use(require('./src/eventlog'), {websocket: ws, log: winston})
 vorpal.use(require('./src/party'), {websocket: ws, log: winston})
 
