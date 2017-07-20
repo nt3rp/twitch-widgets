@@ -2,11 +2,9 @@ var _ = require('lodash');
 var moment = require('moment');
 var fs = require('fs');
 var fsAutocomplete = require('vorpal-autocomplete-fs');
+var utils = require('./utils');
 
 module.exports = function(vorpal, config) {
-  // TODO: Check if provided with a websocket connection
-  // TODO: Handle logging, reconnecting, etc?
-  // TODO: Perhaps this module is the thing that should be wrapped, not the individual commands?
   var websocket = config.websocket;
   var log = config.log;
 
@@ -30,9 +28,7 @@ module.exports = function(vorpal, config) {
   }
 
   var reloadEvents = function(filepath) {
-    var path = filepath || `${defaults.file}.json`;
-    var fsEvents = fs.readFileSync(path, {encoding: 'utf8'});
-    var jsEvents = JSON.parse(fsEvents);
+    var jsEvents = utils.readJsonFile(filepath || `${defaults.file}.json`);
     events = _.clone(jsEvents);
   };
 
@@ -42,8 +38,7 @@ module.exports = function(vorpal, config) {
     .command('save-events [filepath]', 'Load events from JSON file')
     .autocomplete(fsAutocomplete())
     .action(function(args, callback) {
-      var filepath = args.filepath || `${defaults.file}-${(new Date()).getTime()}.json`;
-      fs.writeFileSync(filepath, JSON.stringify(events, null, 2));
+      utils.writeJsonFile(args.filepath || `${defaults.file}-${(new Date()).getTime()}.json`, events)
       callback();
     });
 

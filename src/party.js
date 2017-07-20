@@ -2,12 +2,9 @@ var _ = require('lodash');
 var moment = require('moment');
 var fs = require('fs');
 var fsAutocomplete = require('vorpal-autocomplete-fs');
+var utils = require('./utils');
 
 module.exports = function(vorpal, config) {
-  // TODO: Check if provided with a websocket connection
-  // TODO: Handle logging, reconnecting, etc?
-  // TODO: Perhaps this module is the thing that should be wrapped, not the individual commands?
-  // TODO: Keep track of party here
   var websocket = config.websocket;
   var log = config.log;
 
@@ -30,9 +27,7 @@ module.exports = function(vorpal, config) {
     .command('party load [filepath]', 'Load party from JSON file')
     .autocomplete(fsAutocomplete())
     .action(function(args, callback) {
-      var filepath = args.filepath || defaults.file;
-      var fsParty = fs.readFileSync(filepath, {encoding: 'utf8'});
-      var jsParty = JSON.parse(fsParty);
+      var jsParty = utils.readJsonFile(args.filepath || defaults.file);
       var now = new Date();
       jsParty.forEach(function(member) {
         member.playtimes = member.playtimes || [];
@@ -54,9 +49,7 @@ module.exports = function(vorpal, config) {
   vorpal
     .command('party save [filepath]', 'Save party to JSON')
     .action(function(args, callback) {
-      var filepath = args.filepath || defaults.file;
-      fs.writeFileSync(filepath, JSON.stringify(party, null, 2));
-
+      utils.writeJsonFile(args.filepath || defaults.file, party)
       callback();
     });
 
