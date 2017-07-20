@@ -1,4 +1,13 @@
 # TODO
+
+[ ] Review old todos
+[ ] Track PIDs of files (in case errors... maybe just use nodemon?)
+[ ] Easy way to use es6 in browser and on server
+
+
+
+## OLD
+
 There are so many things that this app could do. Here's how I am trying to keep
 track of them (as compared to having a million TODOs scattered across files).
 

@@ -1,67 +1,42 @@
-var _ = require('lodash');
 var moment = require('moment');
-var fs = require('fs');
 var fsAutocomplete = require('vorpal-autocomplete-fs');
 var utils = require('./utils');
+var Party = require('./party-utils');
 
 module.exports = function(vorpal, config) {
   var websocket = config.websocket;
   var log = config.log;
-
-  var CONFIG_MESSAGE = 'config';
-  var EVENT_MESSAGE = 'event';
 
   var defaults = {
     file: 'data/party.json',
     topics: ['party']
   }
 
-  var party = [];
-
-  // TODO: Send timestamp?
-  var send = function(data) {
-    return websocket.send(JSON.stringify(data));
-  }
+  var party = new Party({defaults: defaults, websocket: websocket});
 
   vorpal
     .command('party load [filepath]', 'Load party from JSON file')
     .autocomplete(fsAutocomplete())
     .action(function(args, callback) {
-      var jsParty = utils.readJsonFile(args.filepath || defaults.file);
-      var now = new Date();
-      jsParty.forEach(function(member) {
-        member.playtimes = member.playtimes || [];
-        member.playtimes = member.playtimes.map(function(playtime) {
-          return new Date(playtime);
-        });
-      });
-      party = _.clone(jsParty);
-
-      send({
-        "type":   CONFIG_MESSAGE,
-        "topics": defaults.topics,
-        "party":  party
-      });
-
+      party.load();
       callback();
     });
 
   vorpal
     .command('party save [filepath]', 'Save party to JSON')
     .action(function(args, callback) {
-      utils.writeJsonFile(args.filepath || defaults.file, party)
+      party.save();
       callback();
     });
 
   vorpal
     .command('party show [id]', 'Show details of a player')
-    .autocomplete({data: function() { return _.map(party, 'id'); }})
+    .autocomplete({data: function() { return party.autocomplete() } })
     .action(function(args, callback) {
       var that = this;
-      var target = (args.id) ? [_.find(party, {'id': args.id})] : party;
-      target.forEach(function(member) {
-        that.log(member);
-      });
+      party.findPlayers(args.id).forEach(function(player) {
+        that.log(player.repr());
+      })
       callback();
     });
 
@@ -76,11 +51,11 @@ module.exports = function(vorpal, config) {
     .option('-n, --name <name>', 'Displayed name')
     .option('-o, --group <group>', 'Displayed org')
     .option('-c, --contact <contact>', 'Displayed contact')
-    .option('--reset-airtimes', 'Reset airtimes')
-    .autocomplete({data: function() { return _.map(party, 'id'); }})
+    .option('--resetPlaytime', 'Reset playtime')
+    .autocomplete({data: function() { return party.autocomplete() } })
     .validate(function(args) {
-      if (_.isEmpty(args.id) && _.isEmpty(args.options)) {
-        return "You must specify an 'id' or provide details. Try --help"
+      if (Object.keys(args.options).length === 0) {
+        return "You must provide details about your changes. Try --help"
       }
     })
     .action(function(args, callback) {
@@ -94,50 +69,14 @@ module.exports = function(vorpal, config) {
         delete args.options.deanimate;
       }
 
-      var now = new Date();
-      var target = (args.id) ? [_.find(party, {'id': args.id})] : party;
-      target.forEach(function(member) {
-        if (args.options['reset-airtimes']) {
-          member.playtimes = [now];
-        }
-
-        if ((args.options.active === false && member.active === true) ||
-            (args.options.active === true && !member.active)) {
-          member.playtimes.push(now)
-        }
-        Object.assign(member, args.options);
-      });
-
-      send({
-        "type":   EVENT_MESSAGE,
-        "topics": defaults.topics,
-        "party":  target
-      });
+      party.editPlayer(args.id, args.options);
 
       log.info({
         'command': 'party edit [id]',
         'args': args,
-        'party': target
+        'party': party.repr()
       });
 
-      callback();
-    });
-
-  vorpal
-    .command('party airtime [id]', 'Find the airtime of a player')
-    .autocomplete({data: function() { return _.map(party, 'id'); }})
-    .action(function(args, callback) {
-      var that = this;
-      var target = (args.id) ? [_.find(party, {'id': args.id})] : party;
-
-      target.forEach(function(member) {
-        var airtime = _(member.playtimes).chunk(2).map(function(pair) {
-          var end = _.nth(pair, 1) || new Date();
-          var start = _.first(pair);
-          return end - start;
-        }).sum()
-        that.log(`${member.name}: ${moment.utc(airtime).format('HH:mm:ss.SSS')}`);
-      });
       callback();
     });
 };
