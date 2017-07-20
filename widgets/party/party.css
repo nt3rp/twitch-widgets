@@ -148,6 +148,10 @@ body {
   text-overflow: ellipsis;
 }
 
+.player .playtime {
+  font-size: 0.8rem;
+}
+
 /* Animations */
 @keyframes idle {
     100% { background-position-x: -96px }
