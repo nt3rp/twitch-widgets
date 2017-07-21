@@ -7,7 +7,7 @@ var EventManager = function(config) {
   this._events = [];
   this._defaults = options.defaults || {
     file: 'data/events.json',
-    topics: ['achievement']
+    topics: ['timeline', 'achievement']
   };
   this._websocket = options.websocket;
 };
@@ -29,7 +29,7 @@ EventManager.prototype.log = function(args) {
       id: utils.slugify(args.name),
       name: args.name || '',
       description: args.name || '',
-      tags: (args.tags || '').split(' ') || ['achievement']
+      tags: (args.tags || '').split(' ') || ['timeline', 'achievement']
     }
     this._events.push(newEvent);
   }
@@ -49,7 +49,7 @@ EventManager.prototype.autocomplete = function() {
 
 EventManager.prototype.filter = function(tag) {
   this._filter = tag;
-  this.emit({data: this.history(), topics: ['history']});
+  this.emit({data: this.history(), topics: ['timeline']});
 };
 
 EventManager.prototype.tags = function() {
@@ -69,6 +69,7 @@ EventManager.prototype.emit = function(event) {
   var mergedEvent = Object.assign({
     type: 'data',
     topics: this._defaults.topics,
+    history: this.history(),
   }, event);
   var wsEvent = JSON.stringify(mergedEvent);
   return this._websocket.send(wsEvent);

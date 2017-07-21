@@ -29,7 +29,7 @@ body {
   position: absolute;
   bottom: 1em;
   border-radius: 5em;
-  border: 1px solid #ff00ff;
+  border: 1px solid #303030;
   background-color: #555;
   min-width: 1em;
   min-height: 1em;
@@ -81,6 +81,12 @@ body {
 
 #current.marker {
   background-color: inherit;
+  border: 0px;
+  bottom: -1.3em;
+}
+
+#current.marker:after {
+  content: none;
 }
 
 #current .icon {
