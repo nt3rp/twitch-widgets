@@ -1,11 +1,9 @@
-// TODO:
-//   - Add history to event manager (so that timeline widget always has all information)
-
 var _ = require('lodash');
 var utils = require('./utils');
 
 var EventManager = function(config) {
   var options = config || {};
+  this._filter = undefined;
   this._events = [];
   this._defaults = options.defaults || {
     file: 'data/events.json',
@@ -38,7 +36,7 @@ EventManager.prototype.log = function(args) {
 
   event.triggered = event.triggered || [];
   event.triggered.push(new Date());
-  this.emit(event);
+  this.emit({data: event});
 }
 
 EventManager.prototype.find = function (id) {
@@ -49,13 +47,31 @@ EventManager.prototype.autocomplete = function() {
   return _.map(this._events, 'id');
 }
 
-// TODO: Add timestamp
+EventManager.prototype.filter = function(tag) {
+  this._filter = tag;
+  this.emit({data: this.history(), topics: ['history']);
+};
+
+EventManager.prototype.tags = function() {
+  return _(this._events).flatMap('tags').compact().concat('*').uniq().value()
+};
+
+EventManager.prototype.history = function() {
+  var that = this;
+  return _(this._events)
+    .filter('triggered')
+    .filter(function(e) { return !that._filter || e.tags.includes(that._filter)})
+    .sortBy(function(e){ return e.triggered.slice(-1)[0] })
+    .value()
+}
+
 EventManager.prototype.emit = function(event) {
-  return this._websocket.send(JSON.stringify({
+  var mergedEvent = Object.assign({
     type: 'event',
     topics: this._defaults.topics,
-    data: event
-  }));
+  }, event);
+  var wsEvent = JSON.stringify(mergedEvent);
+  return this._websocket.send(wsEvent);
 }
 
 module.exports = EventManager;

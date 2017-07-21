@@ -31,6 +31,31 @@ module.exports = function(vorpal, config) {
       callback();
     });
 
+  vorpal
+    .command('events filter [tag]', 'Limit displayed UI events to specific tag')
+    .autocomplete({data: function() { return events.tags() } })
+    .action(function(args, callback) {
+      if (args.tag === '*') {
+        args.tag = undefined;
+      }
+      events.filter(args.tag);
+      callback();
+    });
+
+  vorpal
+    .command('events tags', 'Show all tags from events')
+    .action(function(args, callback) {
+      this.log(events.tags())
+      callback();
+    });
+
+  vorpal
+    .command('events history', 'Show all events that have been triggered')
+    .action(function(args, callback) {
+      this.log(events.history())
+      callback();
+    });
+
   // TODO: timestamp
   // TODO: Show in progress or achievement (either, or, both)
   // TODO: Toggle show / hide of different timeline events
