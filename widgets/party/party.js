@@ -30,8 +30,9 @@ connection.onmessage = function (e) {
   }
 
   switch (msg.type) {
-    case "config":
+    case "data":
       initialize(msg.data);
+      break;
     case "style":
       break;
   }

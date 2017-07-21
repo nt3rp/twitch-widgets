@@ -77,7 +77,7 @@ Party.prototype.repr = function() {
 // TODO: Add timestamp
 Party.prototype.emit = function() {
   return this._websocket.send(JSON.stringify({
-    type: 'config',
+    type: 'data',
     topics: this._defaults.topics,
     data: this.repr()
   }));

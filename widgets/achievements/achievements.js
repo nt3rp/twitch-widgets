@@ -1,6 +1,6 @@
 var server = window.location.hostname + ':' + window.location.port;
 var connection = window.connection = new WebSocket('ws://'+server+'/events');
-var tags = ['achievement'];
+var topic = 'achievement';
 
 connection.onopen = function () {
   // Do nothing for now... maybe send something to the server?
@@ -14,23 +14,18 @@ connection.onerror = function (error) {
 connection.onmessage = function (e) {
   console.log('message');
 
-  // TODO: Check if data!
+  var msg = JSON.parse(e.data);
 
-  var data = JSON.parse(e.data);
-
-  // check if event is in list of subscribed topics
-  // for now, only allow subscribing to one topic
-  if (_.isEmpty(data) || _(tags).intersection(data.tags).isEmpty()) {
+  if (!msg.topics.includes(topic)) {
     return
   }
 
-  switch (data.type) {
-    case 'config':
-      // TODO: Handle configure messages
-      // TODO: Maybe 'configure' is a message topic?
-    break;
-    default:
-      showAchievements(data);
+  switch (msg.type) {
+    case "data":
+      showAchievements(msg.data);
+      break;
+    case "style":
+      break;
   }
 };
 
@@ -62,7 +57,6 @@ var showAchievement = function(achievement, data) {
   }, 5000)
 };
 
-// TODO: Handle achievement stacking
 var showAchievements = function(data) {
   var achievements = document.querySelectorAll('.achievement');
   achievements.forEach(function(element) {
