@@ -18,8 +18,8 @@ EventManager.prototype.load = function(path) {
 };
 
 // TODO: timestamp revisions
-EventManager.prototype.save = function() {
-  utils.writeJsonFile(args.filepath || defaults.file, this._party);
+EventManager.prototype.save = function(path) {
+  utils.writeJsonFile(path || defaults.file, this._party);
 }
 
 EventManager.prototype.log = function(args) {
@@ -49,7 +49,7 @@ EventManager.prototype.autocomplete = function() {
 
 EventManager.prototype.filter = function(tag) {
   this._filter = tag;
-  this.emit({data: this.history(), topics: ['history']);
+  this.emit({data: this.history(), topics: ['history']});
 };
 
 EventManager.prototype.tags = function() {
