@@ -1,5 +1,4 @@
 // TODO:
-//   - Add list of when event was triggered to event data
 //   - Add history to event manager (so that timeline widget always has all information)
 
 var _ = require('lodash');
@@ -26,20 +25,20 @@ EventManager.prototype.save = function() {
 }
 
 EventManager.prototype.log = function(args) {
-  var prevEvent = this.find(args.id);
-  if (prevEvent) {
-    this.emit(prevEvent);
-    return;
+  var event = this.find(args.id);
+  if (!event) {
+    event = {
+      id: utils.slugify(args.name),
+      name: args.name || '',
+      description: args.name || '',
+      tags: (args.tags || '').split(' ') || []
+    }
+    this._events.push(newEvent);
   }
 
-  var newEvent = {
-    id: utils.slugify(args.name),
-    name: args.name || '',
-    description: args.name || '',
-    tags: (args.tags || '').split(' ') || []
-  }
-  this._events.push(newEvent);
-  this.emit(newEvent);
+  event.triggered = event.triggered || [];
+  event.triggered.push(new Date());
+  this.emit(event);
 }
 
 EventManager.prototype.find = function (id) {
