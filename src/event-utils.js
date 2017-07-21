@@ -1,3 +1,7 @@
+// TODO:
+//   - Add list of when event was triggered to event data
+//   - Add history to event manager (so that timeline widget always has all information)
+
 var _ = require('lodash');
 var utils = require('./utils');
 

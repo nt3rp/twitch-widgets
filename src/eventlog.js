@@ -1,8 +1,4 @@
-var _ = require('lodash');
-var moment = require('moment');
-var fs = require('fs');
 var fsAutocomplete = require('vorpal-autocomplete-fs');
-var utils = require('./utils');
 var EventManager = require('./event-utils');
 
 module.exports = function(vorpal, config) {
@@ -46,11 +42,11 @@ module.exports = function(vorpal, config) {
     .option('-d, --description <description>', 'Description of event')
     .option('-t, --tags <tags>', 'Tags of event. Space-separated string.')  // Variadic args not supported on tags
     .validate(function(args) {
-      if (_.isEmpty(args.id) && _.isEmpty(args.options)) {
+      if (!args.id && Object.keys(args.options).length === 0) {
         return "You must specify an 'id' or provide details. Try --help";
       }
 
-      if(_.isEmpty(args.id) && !args.options.name) {
+      if(!args.id && !args.options.name) {
         return "Must specify a name if creating an event";
       }
     })

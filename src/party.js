@@ -1,6 +1,4 @@
-var moment = require('moment');
 var fsAutocomplete = require('vorpal-autocomplete-fs');
-var utils = require('./utils');
 var Party = require('./party-utils');
 
 module.exports = function(vorpal, config) {
