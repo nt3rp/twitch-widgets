@@ -10,7 +10,13 @@ var writeJsonFile = function(path, data) {
   fs.writeFileSync(path, prettyData);
 }
 
+// https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L803
+var slugify = function (string) {
+  return string.toString().trim().toLowerCase().replace(/ /g, '-').replace(/([^a-zA-Z0-9\._-]+)/, '');
+}
+
 module.exports = {
   readJsonFile: readJsonFile,
   writeJsonFile: writeJsonFile,
+  slugify: slugify
 };

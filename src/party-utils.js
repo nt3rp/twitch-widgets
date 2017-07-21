@@ -37,7 +37,10 @@ Player.prototype.repr = function() {
 var Party = function(config) {
   var options = config || {};
   this._party = [];
-  this._defaults = options.defaults;
+  this._defaults = options.defaults || {
+    file: 'data/party.json',
+    topics: ['party']
+  };
   this._websocket = options.websocket;
 }
 
@@ -71,6 +74,7 @@ Party.prototype.repr = function() {
           .map(function (player) { return player.repr(); });
 };
 
+// TODO: Add timestamp
 Party.prototype.emit = function() {
   return this._websocket.send(JSON.stringify({
     type: 'config',

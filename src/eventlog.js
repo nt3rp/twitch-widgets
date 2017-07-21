@@ -17,14 +17,8 @@ module.exports = function(vorpal, config) {
 
   var events = [];
 
-  // TODO: Send timestamp?
   var send = function(data) {
     return websocket.send(JSON.stringify(data));
-  }
-
-  // https://github.com/helion3/lodash-addons/blob/master/src/lodash-addons.js#L803
-  var slugify = function (string) {
-    return _(string).toString().trim().toLowerCase().replace(/ /g, '-').replace(/([^a-zA-Z0-9\._-]+)/, '');
   }
 
   var reloadEvents = function(filepath) {
@@ -59,22 +53,22 @@ module.exports = function(vorpal, config) {
   // TODO: Toggle show / hide of different timeline events
 
   vorpal
-    .command('log [event]', 'Log an event in time')
+    .command('log [id]', 'Log an event in time')
     .autocomplete({data: function() {return _.map(events, 'id');}})
     .option('-n, --name <name>', 'Name of event')
     .option('-d, --description <description>', 'Description of event')
     .option('-t, --tags <tags>', 'Tags of event. Space-separated string.')  // Variadic args not supported on tags
     .validate(function(args) {
-      if (_.isEmpty(args.event) && _.isEmpty(args.options)) {
-        return "You must specify an 'event' or provide details. Try --help";
+      if (_.isEmpty(args.id) && _.isEmpty(args.options)) {
+        return "You must specify an 'id' or provide details. Try --help";
       }
 
-      if(_.isEmpty(args.event) && !args.options.name) {
+      if(_.isEmpty(args.id) && !args.options.name) {
         return "Must specify a name if creating an event";
       }
     })
     .action(function(args, callback) {
-      var event = _.find(events, {id: args.event});
+      var event = _.find(events, {id: args.id});
 
       // Must be a custom event
       if (!event) {

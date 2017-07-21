@@ -6,13 +6,7 @@ var Party = require('./party-utils');
 module.exports = function(vorpal, config) {
   var websocket = config.websocket;
   var log = config.log;
-
-  var defaults = {
-    file: 'data/party.json',
-    topics: ['party']
-  }
-
-  var party = new Party({defaults: defaults, websocket: websocket});
+  var party = new Party({websocket: websocket});
 
   vorpal
     .command('party load [filepath]', 'Load party from JSON file')
