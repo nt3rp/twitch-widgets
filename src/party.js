@@ -12,14 +12,14 @@ module.exports = function(vorpal, config) {
     .command('party load [filepath]', 'Load party from JSON file')
     .autocomplete(fsAutocomplete())
     .action(function(args, callback) {
-      party.load();
+      party.load(args.filepath);
       callback();
     });
 
   vorpal
     .command('party save [filepath]', 'Save party to JSON')
     .action(function(args, callback) {
-      party.save();
+      party.save(args.filepath);
       callback();
     });
 

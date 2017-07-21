@@ -3,58 +3,45 @@ var moment = require('moment');
 var fs = require('fs');
 var fsAutocomplete = require('vorpal-autocomplete-fs');
 var utils = require('./utils');
+var EventManager = require('./event-utils');
 
 module.exports = function(vorpal, config) {
   var websocket = config.websocket;
   var log = config.log;
-
-  var CONFIG_MESSAGE = 'config';
-  var EVENT_MESSAGE = 'event';
-
-  var defaults = {
-    file: 'data/events',
-  }
-
-  var events = [];
-
-  var send = function(data) {
-    return websocket.send(JSON.stringify(data));
-  }
-
-  var reloadEvents = function(filepath) {
-    var jsEvents = utils.readJsonFile(filepath || `${defaults.file}.json`);
-    events = _.clone(jsEvents);
-  };
-
-  reloadEvents();
+  var events = new EventManager({websocket: websocket});
+  events.load();
 
   vorpal
-    .command('save-events [filepath]', 'Load events from JSON file')
+    .command('events save [filepath]', 'Load events from JSON file')
     .autocomplete(fsAutocomplete())
     .action(function(args, callback) {
-      utils.writeJsonFile(args.filepath || `${defaults.file}-${(new Date()).getTime()}.json`, events)
+      events.save(args.filepath);
       callback();
     });
 
   vorpal
-    .command('reload-events [filepath]', 'Load events from JSON file')
+    .command('events load [filepath]', 'Load events from JSON file')
     .autocomplete(fsAutocomplete())
     .action(function(args, callback) {
-      reloadEvents();
+      events.load(args.filepath);
       callback();
     });
 
-  // Save progress
-  // Load progress
-  // Configure
+  vorpal
+    .command('events show [id]', 'Show details of an event')
+    .autocomplete({data: function() { return events.autocomplete() } })
+    .action(function(args, callback) {
+      this.log(events.find(args.id))
+      callback();
+    });
 
   // TODO: timestamp
   // TODO: Show in progress or achievement (either, or, both)
   // TODO: Toggle show / hide of different timeline events
 
   vorpal
-    .command('log [id]', 'Log an event in time')
-    .autocomplete({data: function() {return _.map(events, 'id');}})
+    .command('events log [id]', 'Log an event in time')
+    .autocomplete({data: function() {return events.autocomplete();}})
     .option('-n, --name <name>', 'Name of event')
     .option('-d, --description <description>', 'Description of event')
     .option('-t, --tags <tags>', 'Tags of event. Space-separated string.')  // Variadic args not supported on tags
@@ -68,25 +55,11 @@ module.exports = function(vorpal, config) {
       }
     })
     .action(function(args, callback) {
-      var event = _.find(events, {id: args.id});
-
-      // Must be a custom event
-      if (!event) {
-        event = {
-          id: slugify(args.options.name),
-          name: args.options.name || '',
-          description: args.options.description || '',
-          tags: (args.options.tags || '').split(' ') || []
-        };
-        events.push(event);
-      }
-
+      events.log(Object.assign(args, args.options));
       log.info({
-        'command': 'log [event]',
+        'command': 'log [id]',
         'args': args
       });
-
-      send(_.merge({type: EVENT_MESSAGE}, event));
       callback();
     });
 };
