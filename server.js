@@ -12,7 +12,6 @@ var server = require('http').createServer()
 app.use(express.static('widgets'));
 
 app.get('/cli', function (request, response) {
-  console.log(request.query.cmd);
   msg = {
     type: "CLI",
     command: request.query.cmd
