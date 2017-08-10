@@ -9,6 +9,7 @@ var server = require('http').createServer()
   , app = express()
   , port = 3000;
 
+app.use('/data', express.static('data'));
 app.use(express.static('widgets'));
 
 app.get('/cli', function (request, response) {
