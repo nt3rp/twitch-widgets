@@ -69,14 +69,14 @@ body {
 
 .marker .icon {
   vertical-align: middle;
-  border-radius: 2em;
+  border-radius: 36px;
 }
 
 .icon {
   display: inline-block;
-  width: 48px;
-  height: 48px;
-  background-image: url('bosses.png');
+  width: 72px;
+  height: 72px;
+  background-image: url('achievements.png');
 }
 
 #current.marker {
@@ -101,78 +101,6 @@ body {
     100% { background-position-x: -68px; }
 }
 
-.icon.yakra {
-  background-position-x: 0px;
-}
-
-.icon.dragon-tank {
-  background-position-x: -48px;
-}
-
-.icon.guardian {
-  background-position-x: -96px;
-}
-
-.icon.r-series {
-  background-position-x: -144px;
-}
-
-.icon.heckran {
-  background-position-x: -192px;
-}
-
-.icon.zombor {
-  background-position-x: -240px;
-}
-
-.icon.masamune {
-  background-position-x: -288px;
-}
-
-.icon.nizbel {
-  background-position-x: -336px;
-}
-
-.icon.magus {
-  background-position-x: -384px;
-}
-
-.icon.tyranno {
-  background-position-x: -432px;
-}
-
-.icon.golem {
-  background-position-x: -480px;
-}
-
-.icon.beast {
-  background-position-x: -528px;
-}
-
-.icon.giga-gaia {
-  background-position-x: -576px;
-}
-
-.icon.dalton {
-  background-position-x: -624px;
-}
-
-.icon.golem-twins {
-  background-position-x: -672px;
-}
-
-.icon.lavos {
-  background-position-x: -720px;
-}
-
-.icon.dalton-plus {
-  background-position-x: -768px;
-}
-
-.icon.lavos-final {
-  background-position-x: -816px;
-}
-
 .hide {
   display: none;
 }
@@ -180,3 +108,71 @@ body {
 .show {
   display: block;
 }
+
+/* Achievement mappings */
+/* achivement mappings */
+
+.icon.yakra { background-position: calc(-1*72px) calc(-3*72px); }
+.icon.dragon-tank { background-position: calc(-2*72px) calc(-3*72px); }
+.icon.r-series { background-position: calc(-3*72px) calc(-3*72px); }
+.icon.heckran { background-position: calc(-4*72px) calc(-3*72px); }
+.icon.zombor { background-position: calc(0*72px) calc(-4*72px); }
+.icon.masamune { background-position: calc(-1*72px) calc(-4*72px); }
+.icon.nizbel { background-position: calc(-2*72px) calc(-4*72px); }
+.icon.flea { background-position: calc(-3*72px) calc(-4*72px); }
+.icon.slash { background-position: calc(-4*72px) calc(-4*72px); }
+.icon.magus { background-position: calc(0*72px) calc(-5*72px); }
+.icon.tyranno { background-position: calc(-1*72px) calc(-5*72px); }
+.icon.giga-gaia { background-position: calc(-2*72px) calc(-5*72px); }
+.icon.golem-twins { background-position: calc(-3*72px) calc(-5*72px); }
+.icon.dalton-plus { background-position: calc(-4*72px) calc(-5*72px); }
+.icon.shell { background-position: calc(-6*72px) calc(-3*72px); }
+.icon.lavos { background-position: calc(-7*72px) calc(-3*72px); }
+.icon.bad-end { background-position: calc(-11*72px) calc(-3*72px); }
+.icon.beyond-time { background-position: calc(-12*72px) calc(-3*72px); }
+.icon.reunion { background-position: calc(-13*72px) calc(-3*72px); }
+.icon.dream-project { background-position: calc(-14*72px) calc(-3*72px); }
+.icon.guardias-successor { background-position: calc(-10*72px) calc(-4*72px); }
+.icon.good-night { background-position: calc(-11*72px) calc(-4*72px); }
+.icon.legendary-hero { background-position: calc(-12*72px) calc(-4*72px); }
+.icon.unknown-past { background-position: calc(-13*72px) calc(-4*72px); }
+.icon.people-of-the-times { background-position: calc(-14*72px) calc(-4*72px); }
+.icon.the-oath { background-position: calc(-10*72px) calc(-5*72px); }
+.icon.dino-age { background-position: calc(-11*72px) calc(-5*72px); }
+.icon.prophet-seeks { background-position: calc(-12*72px) calc(-5*72px); }
+.icon.memory-lane { background-position: calc(-13*72px) calc(-5*72px); }
+.icon.race-against-time { background-position: calc(-14*72px) calc(-5*72px); }
+.icon.behind-the-curtain { background-position: calc(-1*72px) calc(-6*72px); }
+.icon.technical-difficulties { background-position: calc(-2*72px) calc(-6*72px); }
+.icon.night-night { background-position: calc(-3*72px) calc(-6*72px); }
+.icon.transformer { background-position: calc(-4*72px) calc(-6*72px); }
+.icon.name { background-position: calc(0*72px) calc(-7*72px); }
+.icon.three-part { background-position: calc(-1*72px) calc(-7*72px); }
+.icon.imgur { background-position: calc(-2*72px) calc(-7*72px); }
+.icon.reddit { background-position: calc(-3*72px) calc(-7*72px); }
+.icon.twitch { background-position: calc(-4*72px) calc(-7*72px); }
+.icon.host { background-position: calc(0*72px) calc(-8*72px); }
+.icon.open-mic { background-position: calc(-1*72px) calc(-8*72px); }
+.icon.punderdome { background-position: calc(-2*72px) calc(-8*72px); }
+.icon.beyond-punderdome { background-position: calc(-3*72px) calc(-8*72px); }
+.icon.unplugged { background-position: calc(-4*72px) calc(-8*72px); }
+.icon.nickscast { background-position: calc(-6*72px) calc(-6*72px); }
+.icon.super-nickscast { background-position: calc(-7*72px) calc(-6*72px); }
+.icon.inception { background-position: calc(-8*72px) calc(-6*72px); }
+.icon.loneliest-number { background-position: calc(-9*72px) calc(-6*72px); }
+.icon.skeleton-crew { background-position: calc(-5*72px) calc(-7*72px); }
+.icon.achievement-unlocked { background-position: calc(-6*72px) calc(-7*72px); }
+.icon.fan-art { background-position: calc(-7*72px) calc(-7*72px); }
+.icon.ebony-and-ivory { background-position: calc(-8*72px) calc(-7*72px); }
+.icon.full-house { background-position: calc(-9*72px) calc(-7*72px); }
+.icon.no-nicks-allowed { background-position: calc(-5*72px) calc(-8*72px); }
+.icon.inevitable-betrayal { background-position: calc(-1*72px) calc(-9*72px); }
+.icon.unexpected-betrayal { background-position: calc(-2*72px) calc(-9*72px); }
+.icon.glitch { background-position: calc(-3*72px) calc(-9*72px); }
+.icon.s-rank { background-position: calc(-4*72px) calc(-9*72px); }
+.icon.no-fear { background-position: calc(0*72px) calc(-10*72px); }
+.icon.the-future-changed { background-position: calc(-6*72px) calc(-9*72px); }
+.icon.party-1959 { background-position: calc(-7*72px) calc(-9*72px); }
+.icon.over-9000 { background-position: calc(-8*72px) calc(-9*72px); }
+.icon.progress { background-position: calc(-9*72px) calc(-9*72px); }
+.icon.radical-dreamers { background-position: calc(-5*72px) calc(-10*72px); }
