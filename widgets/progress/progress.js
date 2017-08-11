@@ -23,7 +23,7 @@ connection.onmessage = function (e) {
 
   var msg = JSON.parse(e.data);
 
-  if (!msg.topics.includes(topic)) {
+  if (!msg.topics || !msg.topics.includes(topic)) {
     return
   }
 
