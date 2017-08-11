@@ -47,14 +47,17 @@ body {
 
 .achievement .text {
   min-width: 0; /* http://stackoverflow.com/a/34945744 */
+  flex: 1;
 }
 
 .achievement .image {
-  height: 64px;
-  width: 64px;
+  height: 72px;
+  width: 72px;
   text-align:center;
   flex: none;
-  background-image: url('icons.png');
+  background-image: url('achievements.png');
+  background-position: calc(-6*72px) calc(-7*72px);
+  margin-right: 8px;
 }
 
 .achievement .name {
@@ -84,7 +87,72 @@ body {
   border-image: url(green.png) 8 fill repeat !important;
 }
 
+/* achivement mappings */
 
+.achievement .image.yakra { background-position: calc(-1*72px) calc(-3*72px); }
+.achievement .image.dragon-tank { background-position: calc(-2*72px) calc(-3*72px); }
+.achievement .image.r-series { background-position: calc(-3*72px) calc(-3*72px); }
+.achievement .image.heckran { background-position: calc(-4*72px) calc(-3*72px); }
+.achievement .image.zombor { background-position: calc(0*72px) calc(-4*72px); }
+.achievement .image.masamune { background-position: calc(-1*72px) calc(-4*72px); }
+.achievement .image.nizbel { background-position: calc(-2*72px) calc(-4*72px); }
+.achievement .image.flea { background-position: calc(-3*72px) calc(-4*72px); }
+.achievement .image.slash { background-position: calc(-4*72px) calc(-4*72px); }
+.achievement .image.magus { background-position: calc(0*72px) calc(-5*72px); }
+.achievement .image.tyranno { background-position: calc(-1*72px) calc(-5*72px); }
+.achievement .image.giga-gaia { background-position: calc(-2*72px) calc(-5*72px); }
+.achievement .image.golem-twins { background-position: calc(-3*72px) calc(-5*72px); }
+.achievement .image.dalton-plus { background-position: calc(-4*72px) calc(-5*72px); }
+.achievement .image.shell { background-position: calc(-6*72px) calc(-3*72px); }
+.achievement .image.lavos { background-position: calc(-7*72px) calc(-3*72px); }
+.achievement .image.bad-end { background-position: calc(-11*72px) calc(-3*72px); }
+.achievement .image.beyond-time { background-position: calc(-12*72px) calc(-3*72px); }
+.achievement .image.reunion { background-position: calc(-13*72px) calc(-3*72px); }
+.achievement .image.dream-project { background-position: calc(-14*72px) calc(-3*72px); }
+.achievement .image.guardias-successor { background-position: calc(-10*72px) calc(-4*72px); }
+.achievement .image.good-night { background-position: calc(-11*72px) calc(-4*72px); }
+.achievement .image.legendary-hero { background-position: calc(-12*72px) calc(-4*72px); }
+.achievement .image.unknown-past { background-position: calc(-13*72px) calc(-4*72px); }
+.achievement .image.people-of-the-times { background-position: calc(-14*72px) calc(-4*72px); }
+.achievement .image.the-oath { background-position: calc(-10*72px) calc(-5*72px); }
+.achievement .image.dino-age { background-position: calc(-11*72px) calc(-5*72px); }
+.achievement .image.prophet-seeks { background-position: calc(-12*72px) calc(-5*72px); }
+.achievement .image.memory-lane { background-position: calc(-13*72px) calc(-5*72px); }
+.achievement .image.race-against-time { background-position: calc(-14*72px) calc(-5*72px); }
+.achievement .image.behind-the-curtain { background-position: calc(-1*72px) calc(-6*72px); }
+.achievement .image.technical-difficulties { background-position: calc(-2*72px) calc(-6*72px); }
+.achievement .image.night-night { background-position: calc(-3*72px) calc(-6*72px); }
+.achievement .image.transformer { background-position: calc(-4*72px) calc(-6*72px); }
+.achievement .image.name { background-position: calc(0*72px) calc(-7*72px); }
+.achievement .image.three-part { background-position: calc(-1*72px) calc(-7*72px); }
+.achievement .image.imgur { background-position: calc(-2*72px) calc(-7*72px); }
+.achievement .image.reddit { background-position: calc(-3*72px) calc(-7*72px); }
+.achievement .image.twitch { background-position: calc(-4*72px) calc(-7*72px); }
+.achievement .image.host { background-position: calc(0*72px) calc(-8*72px); }
+.achievement .image.open-mic { background-position: calc(-1*72px) calc(-8*72px); }
+.achievement .image.punderdome { background-position: calc(-2*72px) calc(-8*72px); }
+.achievement .image.beyond-punderdome { background-position: calc(-3*72px) calc(-8*72px); }
+.achievement .image.unplugged { background-position: calc(-4*72px) calc(-8*72px); }
+.achievement .image.nickscast { background-position: calc(-6*72px) calc(-6*72px); }
+.achievement .image.super-nickscast { background-position: calc(-7*72px) calc(-6*72px); }
+.achievement .image.inception { background-position: calc(-8*72px) calc(-6*72px); }
+.achievement .image.loneliest-number { background-position: calc(-9*72px) calc(-6*72px); }
+.achievement .image.skeleton-crew { background-position: calc(-5*72px) calc(-7*72px); }
+.achievement .image.achievement-unlocked { background-position: calc(-6*72px) calc(-7*72px); }
+.achievement .image.fan-art { background-position: calc(-7*72px) calc(-7*72px); }
+.achievement .image.ebony-and-ivory { background-position: calc(-8*72px) calc(-7*72px); }
+.achievement .image.full-house { background-position: calc(-9*72px) calc(-7*72px); }
+.achievement .image.no-nicks-allowed { background-position: calc(-5*72px) calc(-8*72px); }
+.achievement .image.inevitable-betrayal { background-position: calc(-1*72px) calc(-9*72px); }
+.achievement .image.unexpected-betrayal { background-position: calc(-2*72px) calc(-9*72px); }
+.achievement .image.glitch { background-position: calc(-3*72px) calc(-9*72px); }
+.achievement .image.s-rank { background-position: calc(-4*72px) calc(-9*72px); }
+.achievement .image.no-fear { background-position: calc(0*72px) calc(-10*72px); }
+.achievement .image.the-future-changed { background-position: calc(-6*72px) calc(-9*72px); }
+.achievement .image.party-1959 { background-position: calc(-7*72px) calc(-9*72px); }
+.achievement .image.over-9000 { background-position: calc(-8*72px) calc(-9*72px); }
+.achievement .image.progress { background-position: calc(-9*72px) calc(-9*72px); }
+.achievement .image.radical-dreamers { background-position: calc(-5*72px) calc(-10*72px); }
 /* Pop-up animation */
 
 /* Technique from here: https://weblog.west-wind.com/posts/2014/Feb/22/Using-CSS-Transitions-to-SlideUp-and-SlideDown */

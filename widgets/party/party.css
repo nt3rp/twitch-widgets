@@ -137,6 +137,10 @@ body {
   background-position-y: -192px !important;
 }
 
+.player .icon.schala {
+  background-position-y: -288px !important;
+}
+
 .player .name {
   color: #f8f800;
 }

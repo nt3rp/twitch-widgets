@@ -46,6 +46,11 @@ var showAchievement = function(achievement, data) {
       border.classList.remove(style);
   })
 
+  image.className = 'image';
+  if (data.icon) {
+    image.classList.add(data.icon);
+  }
+
   if (style) {
     border.classList.add(style);
   }
