@@ -32,7 +32,7 @@ body {
   height: 94px;
 
   position: absolute;
-  bottom: 0px;
+  top: 0px; /* Replace with `top` for top right corner */
   right: 0px;
 
   color: #e0e0e0;
