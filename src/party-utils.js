@@ -53,7 +53,7 @@ Party.prototype.load = function(path) {
 };
 
 Party.prototype.save = function(path) {
-  utils.writeJsonFile(path || defaults.file, this._party);
+  utils.writeJsonFile(path || this._defaults.file, this._party);
 };
 
 Party.prototype.editPlayer = function(id, config) {

@@ -19,7 +19,7 @@ EventManager.prototype.load = function(path) {
 
 // TODO: timestamp revisions
 EventManager.prototype.save = function(path) {
-  utils.writeJsonFile(path || defaults.file, this._party);
+  utils.writeJsonFile(path || this._defaults.file, this._events);
 }
 
 EventManager.prototype.log = function(args) {
