@@ -2,6 +2,8 @@
 
 body {
   background-color: #ff00ff;
+  color: #e0e0e0;
+  text-shadow: 0px 1px #000, 1px 0px #000;
 }
 
 @font-face {
@@ -21,7 +23,7 @@ body {
 .chart {
   width: 75%;
   height: 100px;
-  border-bottom: 1px dotted #555;
+  border-bottom: 1px dotted #e0e0e0;
   position: absolute;
   bottom: 2em;
 }
@@ -31,7 +33,7 @@ body {
   bottom: 1em;
   border-radius: 5em;
   border: 1px solid #303030;
-  background-color: #555;
+  background-color: #e0e0e0;
   min-width: 1em;
   min-height: 1em;
   /*bottom: auto;*/
@@ -48,7 +50,7 @@ body {
 
 .marker:after {
   content: '';
-  border-top: 0.4em solid #555;
+  border-top: 0.4em solid #e0e0e0;
   border-right: 0.4em solid transparent;
   border-left: 0.4em solid transparent;
   position: absolute;
@@ -58,14 +60,14 @@ body {
 
 .marker.tick:after {
   border-top: 0;
-  border-bottom: 0.4em solid #555;
+  border-bottom: 0.4em solid #e0e0e0;
   top: -0.5em;
   bottom: auto;
 }
 
 .marker .contents {
   padding: 0.4em;
-  color: #fff;
+  color: #e0e0e0;
 }
 
 .marker .icon {
