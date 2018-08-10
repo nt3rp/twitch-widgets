@@ -149,6 +149,10 @@ body {
   background-position-y: -288px !important;
 }
 
+.player .icon.cyrus {
+  background-position-y: -336px !important;
+}
+
 .player .name {
   color: #f8f800;
 }
