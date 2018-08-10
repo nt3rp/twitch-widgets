@@ -1,0 +1,66 @@
+:root {
+  --zoom: 2.0;
+}
+
+* { box-sizing: border-box }
+
+body {
+  image-rendering: pixelated;
+  font-smooth: never;
+  -webkit-font-smoothing : none;
+  margin: 0px;
+  padding: 0px;
+}
+
+@font-face {
+  font-family: 'Trigger-Bold';
+  src: url('fonts/Trigger-Bold.eot?#iefix') format('embedded-opentype'),  url('fonts/Trigger-Bold.woff') format('woff'), url('fonts/Trigger-Bold.ttf')  format('truetype'), url('fonts/Trigger-Bold.svg#Trigger-Bold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.layer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.gradient {
+  background: -moz-linear-gradient(bottom, rgba(0,0,0,0.3) 0%, rgba(192,192,192,0.5) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(bottom, rgba(0,0,0,0.3) 0%,rgba(192,192,192,0.5) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to top, rgba(0,0,0,0.3) 0%,rgba(192,192,192,0.5) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+.container {
+  width: 10em;
+  position: relative;
+}
+
+.tile {
+  zoom: var(--zoom);
+}
+
+.tile.inactive .gradient.layer {
+  z-index: 1000;
+  background: -moz-linear-gradient(bottom, rgba(0,0,0,0.7) 0%,rgba(64,64,64,0.7) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(bottom, rgba(0,0,0,0.7) 0%,rgba(64,64,64,0.7) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(64,64,64,0.7) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+/* Styles */
+.border {
+  zoom: calc(1.0 / var(--zoom));
+  border-style: solid;
+  border-width: 8px;
+  -moz-border-image: url(default.png) 8 repeat;
+  -webkit-border-image: url(default.png) 8 repeat;
+  -o-border-image: url(default.png) 8 repeat;
+  border-image: url(default.png) 8 fill repeat;
+}
+
+.border.green {
+  -moz-border-image: url(green.png) 8 repeat !important;
+  -webkit-border-image: url(green.png) 8 repeat !important;
+  -o-border-image: url(green.png) 8 repeat !important;
+  border-image: url(green.png) 8 fill repeat !important;
+}
