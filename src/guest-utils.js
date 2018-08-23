@@ -25,12 +25,12 @@ GuestManager.prototype.log = function(args) {
   var event = this.find(args.id);
   if (!event) {
     event = {
-      id: utils.slugify(args.name),
+      id: utils.slugify(args.name || args.id),
       name: args.name || '',
       twitter: args.twitter || '',
       website: args.website || ''
     }
-    this._guests.push(newEvent);
+    this._guests.push(event);
   }
 
   this.emit({data: event});

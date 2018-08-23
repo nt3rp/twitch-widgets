@@ -26,12 +26,12 @@ EventManager.prototype.log = function(args) {
   var event = this.find(args.id);
   if (!event) {
     event = {
-      id: utils.slugify(args.name),
+      id: utils.slugify(args.name || args.id),
       name: args.name || '',
       description: args.name || '',
       tags: (args.tags || '').split(' ') || ['timeline', 'achievement']
     }
-    this._events.push(newEvent);
+    this._events.push(event);
   }
 
   event.triggered = event.triggered || [];
