@@ -16,8 +16,9 @@ ws.on('message', function(data) {
   vorpal.execSync(msg.command);
 })
 
-vorpal.use(require('./src/eventlog'), {websocket: ws, log: winston})
-vorpal.use(require('./src/party'), {websocket: ws, log: winston})
+vorpal.use(require('./src/eventlog'), {websocket: ws, log: winston});
+vorpal.use(require('./src/party'), {websocket: ws, log: winston});
+vorpal.use(require('./src/guest'), {websocket: ws, log: winston});
 
 vorpal
   .delimiter('twitch-widgets >')
